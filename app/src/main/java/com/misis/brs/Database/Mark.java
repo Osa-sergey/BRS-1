@@ -3,6 +3,10 @@ package com.misis.brs.Database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+/**
+ * таблица оценок
+ * get и set методы необходимы для корректной работы room
+ */
 @Entity
 public class Mark {
     @PrimaryKey(autoGenerate = true)

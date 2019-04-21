@@ -1,11 +1,18 @@
 package com.misis.brs.Database;
 
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
+/**
+ * список всех возможных запросов к DB для объекта Hometask
+ */
 public interface HometaskDao {
-
-    @Insert
+    /**
+     * использовать как для добавдения новой записи, так и для обновления старой
+     * @param hometask домашнее задание
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Hometask hometask);
 
     @Query("SELECT * FROM hometask WHERE deadline = :deadline")
@@ -20,8 +27,4 @@ public interface HometaskDao {
     @Query("DELETE FROM hometask WHERE deadline = :deadline")
     void deleteByDeadline(long deadline);
 
-    @Query("UPDATE hometask SET description = :description, " +
-            "checkDone = :checkDone, checkNotify = :checkNotify," +
-            " timeNotification = :timeNotification WHERE deadline = :deadline")
-    void updateByDeadline(long deadline, String description, Boolean checkDone, Boolean checkNotify, long timeNotification);
 }

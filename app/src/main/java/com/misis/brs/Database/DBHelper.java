@@ -7,18 +7,28 @@ import android.util.Log;
 
 import java.util.concurrent.ExecutionException;
 
+/**
+ * класс предназначен для обращения к DB
+ * класс реализован с использованием паттерна одиночка
+ * для начала работы надо вызвать метод getInstance в MainActivity
+ */
 public class DBHelper {
     private static DBHelper instance;
     private AppDatabase db;
     private static String nameofDB;
 
+    /**
+     * реализует паттерн одиночка
+     * @param context контекст приложения
+     * @param nameofDB фамилия и имя авторизованного пользователя в формате конкатенации
+     */
     private DBHelper(Context context, String nameofDB){
         DBHelper.nameofDB = nameofDB;
         db = Room.databaseBuilder(context,AppDatabase.class,nameofDB).build();
     }
 
     public static DBHelper getInstance(Context context, String nameofDB){
-        if(instance == null || !nameofDB.equals(DBHelper.nameofDB)){
+        if(instance == null || !nameofDB.equals(DBHelper.nameofDB)){ //обновляем каждый раз, как меняем пользователя
             instance = new DBHelper(context, nameofDB);
         }
         return instance;
@@ -151,18 +161,6 @@ public class DBHelper {
             }
         };
         task.execute(deadline);
-    }
-
-    public static void updateHometaskByDeadline(final Hometask hometask){
-        AsyncTask<Hometask, Void, Void> task = new AsyncTask<Hometask, Void, Void>() {
-            @Override
-            protected Void doInBackground(Hometask... hometasks) {
-                instance.db.hometaskDao().updateByDeadline(hometask.getDeadline(), hometask.getDescription(),
-                        hometask.getCheckDone(), hometask.getCheckNotify(), hometask.getTimeNotification());
-                return null;
-            }
-        };
-        task.execute(hometask);
     }
 
     public static void insertNews(final News news1){
