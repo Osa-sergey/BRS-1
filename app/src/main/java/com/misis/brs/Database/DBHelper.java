@@ -63,7 +63,7 @@ public class DBHelper {
         } return null;
     }
 
-    public  static Mark[] selectMarksForSemesterAndType(final int semester, final int markType){
+    public static Mark[] selectMarksForSemesterAndType(final int semester, final int markType){
         AsyncTask<Integer, Void, Mark[]> task = new AsyncTask<Integer, Void, Mark[]>() {
             @Override
             protected Mark[] doInBackground(Integer... integers) {
@@ -78,6 +78,91 @@ public class DBHelper {
         } catch (ExecutionException e) {
             Log.e("selectMarksForSem&Type", e.toString());
         }   return null;
+    }
+
+    public static void insertHometask(final Hometask hometask){
+        AsyncTask<Hometask, Void, Void> task = new AsyncTask<Hometask, Void, Void>() {
+            @Override
+            protected Void doInBackground(Hometask... hometasks) {
+                instance.db.hometaskDao().insert(hometask);
+                return null;
+            }
+        };
+        task.execute(hometask);
+    }
+
+    public static Hometask selectHometaskByDeadline(final Long deadline){
+        AsyncTask<Long, Void, Hometask> task = new AsyncTask<Long, Void, Hometask>() {
+            @Override
+            protected Hometask doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectByDeadline(deadline);
+            }
+        };
+        task.execute(deadline);
+        try{
+            task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectTaskByDeadline", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectTaskByDeadline", e.toString());
+        }return null;
+    }
+
+    public static Hometask[] selectOverdueHometask(final Long deadline){
+        AsyncTask<Long, Void, Hometask[]> task = new AsyncTask<Long, Void, Hometask[]>() {
+            @Override
+            protected Hometask[] doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectOverdue(deadline);
+            }
+        };
+        task.execute(deadline);
+        try{
+            task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        }return null;
+    }
+
+    public static Hometask[] selectHometaskForSemester(final int semester){
+        AsyncTask<Integer, Void, Hometask[]> task = new AsyncTask<Integer, Void, Hometask[]>() {
+            @Override
+            protected Hometask[] doInBackground(Integer... integers) {
+                return instance.db.hometaskDao().selectForSemester(semester);
+            }
+        };
+        task.execute(semester);
+        try{
+            task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        }return null;
+    }
+
+    public static void deleteHometaskByDeadline(final long deadline){
+        AsyncTask<Long, Void, Void> task = new AsyncTask<Long, Void, Void>() {
+            @Override
+            protected Void doInBackground(Long... longs) {
+                instance.db.hometaskDao().deleteByDeadline(deadline);
+                return null;
+            }
+        };
+        task.execute(deadline);
+    }
+
+    public static void updateHometaskByDeadline(final Hometask hometask){
+        AsyncTask<Hometask, Void, Void> task = new AsyncTask<Hometask, Void, Void>() {
+            @Override
+            protected Void doInBackground(Hometask... hometasks) {
+                instance.db.hometaskDao().updateByDeadline(hometask.getDeadline(), hometask.getDescription(),
+                        hometask.getCheckDone(), hometask.getCheckNotify(), hometask.getTimeNotification());
+                return null;
+            }
+        };
+        task.execute(hometask);
     }
 
     public static void insertNews(final News news1){
