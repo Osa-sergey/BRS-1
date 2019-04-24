@@ -11,9 +11,14 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface NewsDao {
 
+    // при одинаковых текстах новостей обновляем всё остальное
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(News news);
 
+    /**
+     * удаляет новости которые были созданы раньше dateNews даты
+     * @param dateNews Время до которого все новости удаляются
+     */
     @Query("DELETE FROM news WHERE dateNews < dateNews")
     void deletebyDateNews(long dateNews);
 
