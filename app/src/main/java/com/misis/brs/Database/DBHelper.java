@@ -98,7 +98,7 @@ public class DBHelper {
             @Override
             protected Mark[] doInBackground(Object... objects) {
                 return instance.db.markDao().selectForSemesterAndType((Integer)objects[0], (MarkType)objects[1]); // так как AsyncTask на вход подаёт varArgs,
-                                                                                                // то со входными параметпами надо работать как с массивом
+                                                                                                // то со входными параметрами надо работать как с массивом
             }
         };
         task.execute(semester,markType);
