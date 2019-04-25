@@ -2,21 +2,42 @@ package com.misis.brs.Database;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 
-/**
- * таблица оценок
- * get и set методы необходимы для корректной работы room
- */
 @Entity
 public class Mark {
+    //автоинкремент
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private int markType;
+    //анатация указывает какой класс обрабатывает конвертацию
+    @TypeConverters({Mark.class})
+    private MarkType markType;
     private int semester;
     private int mark;
     private int maxMark;
     private String description;
 
+    // методы  конвертации Enum в int и обратно для хранения в бд
+    @TypeConverter
+    public int fromMarkType(MarkType markType){
+        return markType.ordinal();
+    }
+
+    @TypeConverter
+    public MarkType toMarkType(int value){
+        return MarkType.values()[value];
+    }
+
+
+
+    public MarkType getMarkType() {
+        return markType;
+    }
+
+    public void setMarkType(MarkType markType) {
+        this.markType = markType;
+    }
 
     public long getId() {
         return id;
@@ -24,14 +45,6 @@ public class Mark {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getMarkType() {
-        return markType;
-    }
-
-    public void setMarkType(int markType) {
-        this.markType = markType;
     }
 
     public int getSemester() {

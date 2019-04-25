@@ -15,25 +15,42 @@ import java.util.concurrent.ExecutionException;
 public class DBHelper {
     private static DBHelper instance;
     private AppDatabase db;
-    private static String nameofDB;
+    private static String dbName;
 
     /**
      * реализует паттерн одиночка
      * @param context контекст приложения
-     * @param nameofDB фамилия и имя авторизованного пользователя в формате конкатенации
+     * @param dbName фамилия и имя авторизованного пользователя в формате конкатенации
      */
-    private DBHelper(Context context, String nameofDB){
-        DBHelper.nameofDB = nameofDB;
-        db = Room.databaseBuilder(context,AppDatabase.class,nameofDB).build();
+    private DBHelper(Context context, String dbName){
+        DBHelper.dbName = dbName;
+        db = Room.databaseBuilder(context,AppDatabase.class, dbName).build();
     }
 
-    public static DBHelper getInstance(Context context, String nameofDB){
-        if(instance == null || !nameofDB.equals(DBHelper.nameofDB)){ //обновляем каждый раз, как меняем пользователя
-            instance = new DBHelper(context, nameofDB);
+    /**
+     * метод для получения сущности класса.
+     * Необходимо вызвыать в методе Create активности и при смене авторизованного пользователя
+     * для переключения баз данных в зависимости от авторизованного в текущий момент пользователя
+     * @param context контекст текущей активности
+     * @param dbName название базы данных к которой подключаемся.
+     * Для каждого авторизованного пользователя название бд составляется в виде конкатенации Фамилии и имени
+     * @return возвращает сущность, через которую производится работа с запросами
+     * */
+    public static DBHelper getInstance(Context context, String dbName){
+        if(instance == null || !dbName.equals(DBHelper.dbName)){ //обновляем каждый раз, как меняем пользователя или создаём нового
+            instance = new DBHelper(context, dbName);
         }
         return instance;
     }
 
+    /**
+     * Этот метод должен вызываться только после инициализации с помощью DBHelper.getInstance(...)
+     * данный метод запускается из UI потока приложения и выполняет doInBackground в отдельном потоке.
+     * Выгружает результат в UI поток и закрывает вспомогательный поток.
+     * <тип входного параметра, ... , тип выходного параметра>
+     * Параметры должны быть классами (обвёртками элементарных классов)
+     * @param mark оценка, которую добавляем в бд
+     */
     public static void insertMark(final Mark mark){
         AsyncTask<Mark, Void, Void> task = new AsyncTask<Mark, Void, Void>() {
             @Override
@@ -42,7 +59,7 @@ public class DBHelper {
                 return null;
             }
         };
-        task.execute(mark);
+        task.execute(mark); // выполнение запроса
     }
 
     public static void deleteMarkById(final long id){
@@ -56,6 +73,9 @@ public class DBHelper {
         task.execute(id);
     }
 
+    /**
+     * @param semester порядковый номер семестра начиная с 1
+     */
     public static Mark[] selectMarksForSemester(final int semester){
         AsyncTask<Integer, Void, Mark[]> task = new AsyncTask<Integer, Void, Mark[]>() {
             @Override
@@ -65,7 +85,7 @@ public class DBHelper {
         };
         task.execute(semester);
         try{
-            return task.get();
+            return task.get(); // возвращает массив результата запроса
         } catch (InterruptedException e) {
             Log.e("selectMarksForSemester", e.toString());
         } catch (ExecutionException e) {
@@ -73,11 +93,12 @@ public class DBHelper {
         } return null;
     }
 
-    public static Mark[] selectMarksForSemesterAndType(final int semester, final int markType){
-        AsyncTask<Integer, Void, Mark[]> task = new AsyncTask<Integer, Void, Mark[]>() {
+    public static Mark[] selectMarksForSemesterAndType(final int semester, final MarkType markType){
+        AsyncTask<Object, Void, Mark[]> task = new AsyncTask<Object, Void, Mark[]>() {
             @Override
-            protected Mark[] doInBackground(Integer... integers) {
-                return instance.db.markDao().selectForSemesterAndType(integers[0],integers[1]);
+            protected Mark[] doInBackground(Object... objects) {
+                return instance.db.markDao().selectForSemesterAndType((Integer)objects[0], (MarkType)objects[1]); // так как AsyncTask на вход подаёт varArgs,
+                                                                                                // то со входными параметпами надо работать как с массивом
             }
         };
         task.execute(semester,markType);
@@ -90,27 +111,34 @@ public class DBHelper {
         }   return null;
     }
 
-    public static void insertHometask(final Hometask hometask){
-        AsyncTask<Hometask, Void, Void> task = new AsyncTask<Hometask, Void, Void>() {
+    public static Long insertHometask(final Hometask hometask){
+        AsyncTask<Hometask, Void, Long> task = new AsyncTask<Hometask, Void, Long>() {
             @Override
-            protected Void doInBackground(Hometask... hometasks) {
-                instance.db.hometaskDao().insert(hometask);
-                return null;
+            protected Long doInBackground(Hometask... hometasks) {
+                return instance.db.hometaskDao().insert(hometask);
             }
         };
         task.execute(hometask);
+        try {
+            return task.get();
+        } catch (ExecutionException e) {
+            Log.e("insertHometask", e.toString());
+        } catch (InterruptedException e) {
+            Log.e("insertHometask", e.toString());
+        }
+        return null;
     }
 
-    public static Hometask selectHometaskByDeadline(final Long deadline){
-        AsyncTask<Long, Void, Hometask> task = new AsyncTask<Long, Void, Hometask>() {
+    public static Integer updateHometask (final Hometask hometask){
+        AsyncTask<Hometask, Void, Integer> task = new AsyncTask<Hometask, Void, Integer>() {
             @Override
-            protected Hometask doInBackground(Long... longs) {
-                return instance.db.hometaskDao().selectByDeadline(deadline);
+            protected Integer doInBackground(Hometask... hometasks) {
+                return instance.db.hometaskDao().update(hometask);
             }
         };
-        task.execute(deadline);
+        task.execute(hometask);
         try{
-            task.get();
+           return task.get();
         } catch (InterruptedException e) {
             Log.e("selectTaskByDeadline", e.toString());
         } catch (ExecutionException e) {
@@ -127,7 +155,7 @@ public class DBHelper {
         };
         task.execute(deadline);
         try{
-            task.get();
+            return task.get();
         } catch (InterruptedException e) {
             Log.e("selectOverdueHometask", e.toString());
         } catch (ExecutionException e) {
@@ -144,7 +172,7 @@ public class DBHelper {
         };
         task.execute(semester);
         try{
-            task.get();
+            return task.get();
         } catch (InterruptedException e) {
             Log.e("selectTaskForSemester", e.toString());
         } catch (ExecutionException e) {
