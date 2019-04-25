@@ -4,25 +4,31 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
- * таблица домашних заданий
- * get и set методы необходимы для корректной работы room
+ * класс описываюший сущность домашнего задания.
+ * на основе этого класса строится одноимённая таблица
+ * !!!!!!!!!!
+ * get и set методы необходимы для того, чтобы room runtime мог работать с private полями в классе
  */
 @Entity
 public class Hometask {
-    @PrimaryKey()
-    private long deadline;
+    @PrimaryKey() // анотация первичного ключа для таблицы
+    private final long deadline; // неизменяемый параметр для дз
     private String description;
     private Boolean checkDone;
     private int semester;
     private Boolean checkNotify;
     private long timeNotification;
 
-    public long getDeadline() {
-        return deadline;
+    /**
+     * конструктор необходим для объявления final переменной
+     * @param deadline дата окончания домашней работы, до которой её надо выполненить
+     */
+    public Hometask(long deadline) {
+        this.deadline = deadline;
     }
 
-    public void setDeadline(long deadline) {
-        this.deadline = deadline;
+    public long getDeadline() {
+        return deadline;
     }
 
     public String getDescription() {
