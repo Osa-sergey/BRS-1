@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#0e2a38</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="dark">#1A4961</color>
+    <color name="colorBackgroundActivity">#FFF</color>
+    <color name="colorBackgroundBottomMenu">#256D8F</color>
+    <color name="colorItemBackgroundBottomMenu">#FFF</color>
 
-    <color name="white">#FFFF</color>
-    <color name="bottomMenu">#256D8F</color>
-    <color name="bottom_navigation_item_background_color">#FFFF</color>
+    <color name="colorSideHeaderBackground">#9C3844</color>
+    <color name="colorSideBackground">#256D8F</color>
 </resources>
