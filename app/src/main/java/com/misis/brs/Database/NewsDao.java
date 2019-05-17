@@ -19,7 +19,7 @@ public interface NewsDao {
      * удаляет новости которые были созданы раньше dateNews даты
      * @param dateNews Время до которого все новости удаляются
      */
-    @Query("DELETE FROM news WHERE dateNews < dateNews")
+    @Query("DELETE FROM news WHERE dateNews < :dateNews")
     void deletebyDateNews(long dateNews);
 
     @Query("SELECT * FROM NEWS")
