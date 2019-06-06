@@ -5,6 +5,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
 
+import java.util.Vector;
+
 /**
  * список всех возможных запросов к DB для объекта Mark
  */
@@ -18,8 +20,8 @@ public interface MarkDao {
     void deleteById(long id);
 
     @Query("SELECT * FROM mark WHERE semester = :semester")
-    Mark[] selectForSemester(int semester);
+    Vector<Mark> selectForSemester(int semester);
 
     @Query("SELECT * FROM mark WHERE semester = :semester AND markType = :markType")
-    Mark[] selectForSemesterAndType(int semester, @TypeConverters({Mark.class}) MarkType markType);
+    Vector<Mark> selectForSemesterAndType(int semester, @TypeConverters({Mark.class}) MarkType markType);
 }
