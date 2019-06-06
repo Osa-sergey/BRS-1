@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardBackgroundColor="@color/colorTaskItemBackground"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="11dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/taskText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="Roboto"
+                android:maxLines="1"
+                android:text="Writing a blog"
+                android:textColor="@color/colorTextTask"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/taskDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="Roboto"
+                android:text="25.09.19"
+                android:textColor="@color/colorTextTask"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/notification"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="28dp"
+            android:layout_height="66dp"
+            android:button="@drawable/notification_selector"/>
+
+        <LinearLayout
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorDoneCheckBoxBackground">
+
+            <CheckBox
+                android:id="@+id/done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:button="@drawable/done_selector" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
