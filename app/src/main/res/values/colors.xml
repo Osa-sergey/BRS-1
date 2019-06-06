@@ -39,4 +39,7 @@
     <color name="colorPointsBackground">#1E5A75</color>
     <color name="colorTextButton">#FFF</color>
     <color name="colorTextPoints">#FFF</color>
+
+    <color name="gradientNumberPickerStartEnd">#80BEDB</color>
+    <color name="gradientNumberPickerMiddle">#FFF</color>
 </resources>
