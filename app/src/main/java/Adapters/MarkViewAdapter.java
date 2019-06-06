@@ -16,7 +16,7 @@ import java.util.Vector;
 
 public class MarkViewAdapter extends RecyclerView.Adapter<MarkViewAdapter.ViewHolder> {
 
-    private Vector<Mark> marksVector;
+    private Vector<Mark> marksVector = new Vector<>();
 
     public void setItems(Vector<Mark> marks){
         marksVector.addAll(marks);
@@ -48,6 +48,7 @@ public class MarkViewAdapter extends RecyclerView.Adapter<MarkViewAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+
         private TextView mark;
         private TextView description;
         private TextView markType;
