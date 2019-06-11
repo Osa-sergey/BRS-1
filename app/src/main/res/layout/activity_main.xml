@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/colorActivityBackground"
     >
-
+<!--> LinearLayout обязан стоять первым, чтобы отрисовываться под всем меню<-->
     <LinearLayout
         android:id="@+id/replace"
         android:layout_width="match_parent"
