@@ -7,15 +7,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.misis.brs.R;
 
-public class PointsFragment extends Fragment {
+public class ContactsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_points,container,false);
+        View view = inflater.inflate(R.layout.fragment_contacts,container,false);
+
+        //изменение toolbar
+        ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.contacts_toolbar);
+        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
 
         return view;
     }
