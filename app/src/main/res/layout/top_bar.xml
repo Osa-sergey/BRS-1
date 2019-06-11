@@ -19,7 +19,7 @@
                 android:id="@+id/toolbarText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NEWS"
+                android:text="@string/news_toolbar"
                 android:fontFamily="Roboto"
                 android:textColor="@color/colorToolBarText"
                 android:textSize="18sp" />
