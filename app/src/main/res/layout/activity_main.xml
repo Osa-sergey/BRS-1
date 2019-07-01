@@ -13,21 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/include3"
-        app:layout_constraintTop_toTopOf="@+id/include2" />
+        app:layout_constraintBottom_toTopOf="@+id/include2"
+        app:layout_constraintTop_toTopOf="@+id/include1" />
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include1"
         layout="@layout/side_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <include
-        android:id="@+id/include3"
+        android:id="@+id/include2"
         layout="@layout/main_frame_and_bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/include2" />
+        app:layout_constraintBottom_toBottomOf="@+id/include1" />
 
 </android.support.constraint.ConstraintLayout>

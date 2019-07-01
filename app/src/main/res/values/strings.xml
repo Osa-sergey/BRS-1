@@ -55,4 +55,12 @@
         <item>Midterm/Diagnostic</item>
         <item>Final Test/IELTS</item>
     </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="news_toolbar">NEWS</string>
+    <string name="contacts_toolbar">CONTACTS</string>
+
 </resources>
+

@@ -1,6 +1,7 @@
 package com.misis.brs.Adapters;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.misis.brs.Database.News;
+import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 
 import java.util.ArrayList;
@@ -60,6 +62,12 @@ public class NewsViewAdapter extends RecyclerView.Adapter<NewsViewAdapter.NewsVi
     public NewsViewAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.view_news_simple_item, viewGroup, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return new NewsViewHolder(view);
     }
 
