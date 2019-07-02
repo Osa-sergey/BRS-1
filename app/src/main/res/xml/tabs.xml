@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        drawable="@drawable/ic_bn_home"
+        text="" />
+
+    <tab
+        drawable="@drawable/ic_bn_points"
+        text="" />
+
+    <tab
+        drawable="@drawable/ic_bn_tasks"
+        text="" />
+
+</tabs>

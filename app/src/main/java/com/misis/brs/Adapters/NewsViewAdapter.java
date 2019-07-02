@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.misis.brs.Database.News;
-import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 
 import java.util.ArrayList;

@@ -14,13 +14,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/include2"
-        app:layout_constraintTop_toTopOf="@+id/include1" />
+        app:layout_constraintTop_toTopOf="@+id/include2" />
 
-    <include
-        android:id="@+id/include1"
-        layout="@layout/side_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <include
         android:id="@+id/include2"
@@ -28,6 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/include1" />
+        app:layout_constraintBottom_toBottomOf="@+id/replace" />
 
 </android.support.constraint.ConstraintLayout>
