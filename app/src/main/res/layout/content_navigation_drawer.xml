@@ -12,14 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.iammert.library.readablebottombar.ReadableBottomBar
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:id="@+id/readablebottom"
-        app:rbb_tabs="@xml/tabs"
-        android:layout_alignParentBottom="true">
 
-    </com.iammert.library.readablebottombar.ReadableBottomBar>
     </RelativeLayout>
 
 </FrameLayout>

@@ -27,8 +27,8 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news,container,false);
 
        //изменение toolbar
-//        ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.news_toolbar);
-//        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
+        ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.news_toolbar);
+        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.news_list);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
