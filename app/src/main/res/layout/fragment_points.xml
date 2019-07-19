@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -91,13 +91,14 @@
         app:layout_constraintTop_toBottomOf="@id/addPoints"
         android:layout_marginTop="18dp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/points_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
+        android:dividerHeight="@dimen/divider_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bar"
         android:layout_marginTop="16dp"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

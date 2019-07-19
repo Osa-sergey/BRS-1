@@ -1,17 +1,18 @@
 package com.misis.brs.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,15 +22,15 @@ import com.misis.brs.Database.Mark;
 import com.misis.brs.Database.MarkType;
 import com.misis.brs.R;
 
+import java.util.Vector;
+
 public class MarksFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private MarkViewAdapter markViewAdapter;
-    private LinearLayoutManager linearLayoutManager;
     private NumberPicker mark;
     private NumberPicker maxMark;
     private EditText description;
     private Button addPoints;
+    private MarkViewAdapter markViewAdapter;
 
     @Nullable
     @Override
@@ -40,7 +41,6 @@ public class MarksFragment extends Fragment {
         maxMark = (NumberPicker) view.findViewById(R.id.max_mark_picker);
         description = (EditText) view.findViewById(R.id.description_edit_text);
         addPoints = (Button) view.findViewById(R.id.addPoints);
-        recyclerView = (RecyclerView) view.findViewById(R.id.points_list);
 
         //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText("");
@@ -54,33 +54,17 @@ public class MarksFragment extends Fragment {
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setAdapter(adapter);
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setSelection(0);
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        markViewAdapter = new MarkViewAdapter();
-
-
-        //проба
+        Vector<Mark> marks = new Vector<>();
         Mark mark = new Mark();
         mark.setMark(5);
         mark.setMaxMark(10);
         mark.setMarkType(MarkType.FINAL_TEST);
-        mark.setDescription("ddf");
-        markViewAdapter.setItems(mark);
+        mark.setDescription("dvdvfbfbfbfbdbfdbfdbfdbdfbdfb");
+        marks.add(mark);
+        marks.add(mark);
+        markViewAdapter = new MarkViewAdapter(getActivity(),marks);
+        ((ListView) view.findViewById(R.id.points_list)).setAdapter(markViewAdapter);
 
-        recyclerView.setAdapter(markViewAdapter);
-
-        addPoints.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Mark mark = new Mark();
-                mark.setMark(5);
-                mark.setMaxMark(10);
-                mark.setMarkType(MarkType.FINAL_TEST);
-                mark.setDescription("ddf");
-                markViewAdapter.setItems(mark);
-                markViewAdapter.notifyItemInserted(0);*/
-            }
-        });
         return view;
     }
 }
