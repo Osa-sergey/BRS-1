@@ -8,10 +8,29 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+        <com.iammert.library.readablebottombar.ReadableBottomBar
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            app:rbb_tabs="@xml/tabs"
+            app:rbb_backgroundColor="#00ADEE"
+            app:rbb_indicatorColor="#FDB414"
+            app:rbb_indicatorHeight="4dp"
+            app:rbb_initialIndex="0"
+            app:rbb_textColor="#FFF" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

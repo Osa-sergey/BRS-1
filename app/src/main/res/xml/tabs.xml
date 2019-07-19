@@ -2,14 +2,14 @@
 <tabs>
     <tab
         drawable="@drawable/ic_bn_home"
-        text="" />
+        text="Home" />
 
     <tab
         drawable="@drawable/ic_bn_points"
-        text="" />
+        text="Points" />
 
     <tab
         drawable="@drawable/ic_bn_tasks"
-        text="" />
+        text="Tasks" />
 
 </tabs>

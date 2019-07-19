@@ -54,7 +54,7 @@ public class NavigationDrawer extends AppCompatActivity
         isClosed=true;
 
         navigationView = findViewById(R.id.nav_view);
-        readableBottomBar = findViewById(R.id.readablebottom);
+        readableBottomBar = findViewById(R.id.bottom_bar);
 
         ibDropdown = navigationView.getHeaderView(0).findViewById(R.id.extraInfoButton);
         extraInfo = navigationView.getHeaderView(0).findViewById(R.id.extra);
