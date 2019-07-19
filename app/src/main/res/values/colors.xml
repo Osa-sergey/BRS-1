@@ -43,4 +43,5 @@
 
     <color name="gradientNumberPickerStartEnd">#80BEDB</color>
     <color name="gradientNumberPickerMiddle">#FFF</color>
+    <color name="menuLine">#f8b113</color>
 </resources>

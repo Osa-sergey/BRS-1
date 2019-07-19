@@ -3,20 +3,23 @@ package com.misis.brs;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.iammert.library.readablebottombar.ReadableBottomBar;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometasksFragment;
@@ -42,7 +45,9 @@ public class NavigationDrawer extends AppCompatActivity
     LinearLayout extraInfo;
 
     Boolean isClosed;
-    ReadableBottomBar readableBottomBar;
+
+    LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class NavigationDrawer extends AppCompatActivity
         isClosed=true;
 
         navigationView = findViewById(R.id.nav_view);
-        readableBottomBar = findViewById(R.id.bottom_bar);
+        bottomNavigationView = findViewById(R.id.nav_view_bottom);
 
         ibDropdown = navigationView.getHeaderView(0).findViewById(R.id.extraInfoButton);
         extraInfo = navigationView.getHeaderView(0).findViewById(R.id.extra);
@@ -67,6 +72,41 @@ public class NavigationDrawer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                fTrans = getFragmentManager().beginTransaction();
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_bottom_home:
+                        fTrans.replace(R.id.themaincontainer, homeFragment);
+                        llFirstLabel.setVisibility(View.VISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_points:
+                        fTrans.replace(R.id.themaincontainer, marksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.VISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_edittask:
+                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.VISIBLE);
+                        fTrans.commit();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        llFirstLabel = findViewById(R.id.llMenuFirstLabel);
+        llSecondLabel = findViewById(R.id.llMenuSecondLabel);
+        llThirdLabel = findViewById(R.id.llMenuThirdLabel);
 
 
         ibDropdown.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +191,9 @@ public class NavigationDrawer extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
+
 
 
 }
