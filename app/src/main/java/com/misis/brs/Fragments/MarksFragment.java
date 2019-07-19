@@ -54,7 +54,7 @@ public class MarksFragment extends Fragment {
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setAdapter(adapter);
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setSelection(0);
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         markViewAdapter = new MarkViewAdapter();
 
