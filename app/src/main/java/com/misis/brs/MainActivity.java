@@ -15,6 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import android.app.Fragment;
+
 import android.view.Menu;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,7 +29,7 @@ import com.misis.brs.Fragments.MarksFragment;
 import com.misis.brs.Fragments.NewsFragment;
 import com.misis.brs.Fragments.NewsViewFragment;
 
-public class NavigationDrawer extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ContactsFragment contactsFragment;
@@ -37,17 +39,15 @@ public class NavigationDrawer extends AppCompatActivity
     NewsFragment newsFragment;
     NewsViewFragment newsViewFragment;
 
-    FragmentTransaction fTrans;
-
     ImageButton ibDropdown;
 
     NavigationView navigationView;
-    LinearLayout extraInfo;
+    BottomNavigationView bottomNavigationView;
 
     Boolean isClosed;
 
+    LinearLayout extraInfo;
     LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
-    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,90 +72,6 @@ public class NavigationDrawer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        //ops
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                fTrans = getFragmentManager().beginTransaction();
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation_bottom_home:
-                        fTrans.replace(R.id.themaincontainer, homeFragment);
-                        llFirstLabel.setVisibility(View.VISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_points:
-                        fTrans.replace(R.id.themaincontainer, marksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.VISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_edittask:
-                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.VISIBLE);
-                        fTrans.commit();
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        llFirstLabel = findViewById(R.id.llMenuFirstLabel);
-        llSecondLabel = findViewById(R.id.llMenuSecondLabel);
-        llThirdLabel = findViewById(R.id.llMenuThirdLabel);
-
-        //
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                fTrans = getFragmentManager().beginTransaction();
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation_bottom_home:
-                        fTrans.replace(R.id.themaincontainer, homeFragment);
-                        llFirstLabel.setVisibility(View.VISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_points:
-                        fTrans.replace(R.id.themaincontainer, marksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.VISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_edittask:
-                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.VISIBLE);
-                        fTrans.commit();
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        llFirstLabel = findViewById(R.id.llMenuFirstLabel);
-        llSecondLabel = findViewById(R.id.llMenuSecondLabel);
-        llThirdLabel = findViewById(R.id.llMenuThirdLabel);
-
-
-        ibDropdown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isClosed)
-                    extraInfo.setVisibility(View.VISIBLE);
-                else
-                    extraInfo.setVisibility(View.GONE);
-
-                isClosed = !isClosed;
-            }
-        });
 
         contactsFragment = new ContactsFragment();
         homeFragment = new HomeFragment();
@@ -164,9 +80,49 @@ public class NavigationDrawer extends AppCompatActivity
         newsFragment = new NewsFragment();
         newsViewFragment = new NewsViewFragment();
 
-        fTrans = getFragmentManager().beginTransaction();
-        fTrans.replace(R.id.themaincontainer, homeFragment);
-        fTrans.commit();
+        llFirstLabel = findViewById(R.id.llMenuFirstLabel);
+        llSecondLabel = findViewById(R.id.llMenuSecondLabel);
+        llThirdLabel = findViewById(R.id.llMenuThirdLabel);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_home:
+                        replaceFragment(R.id.themaincontainer,homeFragment);
+                        llFirstLabel.setVisibility(View.VISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        return true;
+                    case R.id.navigation_points:
+                        replaceFragment(R.id.themaincontainer,marksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.VISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        return true;
+                    case R.id.navigation_hometask:
+                        replaceFragment(R.id.themaincontainer,hometasksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.VISIBLE);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        ibDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isClosed)
+                    extraInfo.setVisibility(View.VISIBLE);
+                else
+                    extraInfo.setVisibility(View.GONE);
+                isClosed = !isClosed;
+            }
+        });
+
+        replaceFragment(R.id.themaincontainer,homeFragment);
     }
 
 
@@ -187,60 +143,19 @@ public class NavigationDrawer extends AppCompatActivity
         return true;
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.navigation_bottom_home:
-                        fTrans.replace(R.id.themaincontainer, homeFragment);
-                        llFirstLabel.setVisibility(View.VISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_points:
-                        fTrans.replace(R.id.themaincontainer, marksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.VISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
-                        fTrans.commit();
-                        return true;
-                    case R.id.navigation_edittask:
-                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.VISIBLE);
-                        fTrans.commit();
-                        return true;
-                }
-                return false;
-            }
-
-
-        };
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        fTrans = getFragmentManager().beginTransaction();
-
         try {
             switch (id) {
                 case R.id.News:
-                    fTrans.replace(R.id.themaincontainer, newsFragment);
-
+                    replaceFragment(R.id.themaincontainer,newsFragment);
                     break;
                 case R.id.Contacts:
-                    fTrans.replace(R.id.themaincontainer, contactsFragment);
-
-
+                    replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
                 case R.id.BugReport:
                     // TODO: Добавить баг репорт
@@ -252,8 +167,6 @@ public class NavigationDrawer extends AppCompatActivity
                     //
                     break;
             }
-
-            fTrans.commit();
 
             llFirstLabel.setVisibility(View.GONE);
             llSecondLabel.setVisibility(View.GONE);
@@ -269,6 +182,10 @@ public class NavigationDrawer extends AppCompatActivity
 
     }
 
-
+    public void replaceFragment(int res, Fragment fragment){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(res,fragment);
+        ft.commit();
+    }
 
 }
