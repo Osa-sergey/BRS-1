@@ -15,6 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+
 import android.app.Fragment;
 
 import android.view.Menu;
@@ -90,21 +92,15 @@ public class MainActivity extends AppCompatActivity
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_home:
                         replaceFragment(R.id.themaincontainer,homeFragment);
-                        llFirstLabel.setVisibility(View.VISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        bottomMenuStick(1);
                         return true;
                     case R.id.navigation_points:
                         replaceFragment(R.id.themaincontainer,marksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.VISIBLE);
-                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        bottomMenuStick(2);
                         return true;
                     case R.id.navigation_hometask:
                         replaceFragment(R.id.themaincontainer,hometasksFragment);
-                        llFirstLabel.setVisibility(View.INVISIBLE);
-                        llSecondLabel.setVisibility(View.INVISIBLE);
-                        llThirdLabel.setVisibility(View.VISIBLE);
+                        bottomMenuStick(3);
                         return true;
                 }
                 return false;
@@ -122,7 +118,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        replaceFragment(R.id.themaincontainer,homeFragment);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.themaincontainer,homeFragment);
+        ft.commit();
     }
 
 
@@ -185,7 +183,27 @@ public class MainActivity extends AppCompatActivity
     public void replaceFragment(int res, Fragment fragment){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(res,fragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 
+    public void bottomMenuStick(int configuration){
+        switch (configuration){
+            case 1:
+                llFirstLabel.setVisibility(View.VISIBLE);
+                llSecondLabel.setVisibility(View.INVISIBLE);
+                llThirdLabel.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+                llFirstLabel.setVisibility(View.INVISIBLE);
+                llSecondLabel.setVisibility(View.VISIBLE);
+                llThirdLabel.setVisibility(View.INVISIBLE);
+                break;
+            case 3:
+                llFirstLabel.setVisibility(View.INVISIBLE);
+                llSecondLabel.setVisibility(View.INVISIBLE);
+                llThirdLabel.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.misis.brs.Adapters.HometasksViewAdapter;
 import com.misis.brs.Database.Hometask;
+import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 
 import java.util.Vector;
@@ -20,6 +21,12 @@ import java.util.Vector;
 public class HometasksFragment extends Fragment {
 
     HometasksViewAdapter hometasksViewAdapter;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).bottomMenuStick(3);
+    }
 
     @Nullable
     @Override

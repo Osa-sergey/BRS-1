@@ -11,9 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 
 public class HomeFragment extends Fragment {
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).bottomMenuStick(1);
+    }
 
     @Nullable
     @Override
