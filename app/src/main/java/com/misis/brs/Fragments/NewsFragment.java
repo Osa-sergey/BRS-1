@@ -20,6 +20,7 @@ import com.misis.brs.Adapters.NewsViewAdapter;
 import com.misis.brs.Database.News;
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
+import com.misis.brs.TimeHelper;
 
 import java.util.Vector;
 
@@ -57,8 +58,7 @@ public class NewsFragment extends Fragment {
                 Toast.makeText( getActivity().getApplicationContext(),"go",Toast.LENGTH_LONG).show();
                 Bundle args = new Bundle();
                 args.putString("title",news.elementAt(position).getHeader());
-                //TODO проблема со временем
-                args.putString("date",news.elementAt(position).getDateNews()+"");
+                args.putString("date", TimeHelper.getTime(news.elementAt(position).getDateNews()));
                 args.putString("text",news.elementAt(position).getDescription());
                 newsFragment.setArguments(args);
 

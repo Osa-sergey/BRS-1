@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.misis.brs.Database.Hometask;
 import com.misis.brs.R;
+import com.misis.brs.TimeHelper;
 
 import java.util.Vector;
 
@@ -44,8 +45,7 @@ public class HometasksViewAdapter extends BaseAdapter {
         View view = inflater.inflate(R.layout.view_task_simple_item,null);
 
         ((TextView) view.findViewById(R.id.taskText)).setText(hometasks.get(position).getDescription());
-        //TODO разобраться со временем
-        ((TextView) view.findViewById(R.id.taskDate)).setText(hometasks.get(position).getDeadline()+ "");
+        ((TextView) view.findViewById(R.id.taskDate)).setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
         ((CheckBox) view.findViewById(R.id.notification)).setChecked(hometasks.get(position).getCheckNotify());
         ((CheckBox) view.findViewById(R.id.done)).setChecked(hometasks.get(position).getCheckDone());
 
