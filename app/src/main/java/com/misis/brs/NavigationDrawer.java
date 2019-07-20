@@ -72,6 +72,41 @@ public class NavigationDrawer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //ops
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                fTrans = getFragmentManager().beginTransaction();
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_bottom_home:
+                        fTrans.replace(R.id.themaincontainer, homeFragment);
+                        llFirstLabel.setVisibility(View.VISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_points:
+                        fTrans.replace(R.id.themaincontainer, marksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.VISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_edittask:
+                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.VISIBLE);
+                        fTrans.commit();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        llFirstLabel = findViewById(R.id.llMenuFirstLabel);
+        llSecondLabel = findViewById(R.id.llMenuSecondLabel);
+        llThirdLabel = findViewById(R.id.llMenuThirdLabel);
 
         //
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -151,6 +186,41 @@ public class NavigationDrawer extends AppCompatActivity
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
         return true;
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.navigation_bottom_home:
+                        fTrans.replace(R.id.themaincontainer, homeFragment);
+                        llFirstLabel.setVisibility(View.VISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_points:
+                        fTrans.replace(R.id.themaincontainer, marksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.VISIBLE);
+                        llThirdLabel.setVisibility(View.INVISIBLE);
+                        fTrans.commit();
+                        return true;
+                    case R.id.navigation_edittask:
+                        fTrans.replace(R.id.themaincontainer, hometasksFragment);
+                        llFirstLabel.setVisibility(View.INVISIBLE);
+                        llSecondLabel.setVisibility(View.INVISIBLE);
+                        llThirdLabel.setVisibility(View.VISIBLE);
+                        fTrans.commit();
+                        return true;
+                }
+                return false;
+            }
+
+
+        };
 
 
     @SuppressWarnings("StatementWithEmptyBody")
