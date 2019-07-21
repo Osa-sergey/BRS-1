@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometasksFragment;
@@ -34,22 +35,24 @@ import com.misis.brs.Fragments.NewsViewFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ContactsFragment contactsFragment;
-    HomeFragment homeFragment;
-    HometasksFragment hometasksFragment;
-    MarksFragment marksFragment;
-    NewsFragment newsFragment;
-    NewsViewFragment newsViewFragment;
+    private ContactsFragment contactsFragment;
+    private HomeFragment homeFragment;
+    private HometasksFragment hometasksFragment;
+    private MarksFragment marksFragment;
+    private NewsFragment newsFragment;
+    private NewsViewFragment newsViewFragment;
 
-    ImageButton ibDropdown;
+    private ImageButton ibDropdown;
 
-    NavigationView navigationView;
-    BottomNavigationView bottomNavigationView;
+    private NavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
 
-    Boolean isClosed;
+    private Boolean isClosed;
 
-    LinearLayout extraInfo;
-    LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
+    private LinearLayout extraInfo;
+    private LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
+
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,8 @@ public class MainActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.nav_view_bottom);
 
+        //инициализируем БД
+        dbHelper = DBHelper.getInstance(getApplicationContext(),"test");
         ibDropdown = navigationView.getHeaderView(0).findViewById(R.id.extraInfoButton);
         extraInfo = navigationView.getHeaderView(0).findViewById(R.id.extra);
         extraInfo.setVisibility(View.GONE);
