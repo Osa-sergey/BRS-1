@@ -1,5 +1,6 @@
 package com.misis.brs.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.misis.brs.Adapters.HometasksViewAdapter;
 import com.misis.brs.Database.Hometask;
@@ -20,7 +22,7 @@ import java.util.Vector;
 
 public class HometasksFragment extends Fragment {
 
-    HometasksViewAdapter hometasksViewAdapter;
+    private HometasksViewAdapter hometasksViewAdapter;
 
     @Override
     public void onResume() {
@@ -47,6 +49,12 @@ public class HometasksFragment extends Fragment {
         hometasks.add(ht);
         hometasksViewAdapter = new HometasksViewAdapter(getActivity(),hometasks);
         ((ListView) view.findViewById(R.id.tasks_list)).setAdapter(hometasksViewAdapter);
+
+        //TODO удалить после отладки
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+        int semesterValue = pref.getInt("semester", 1);
+        Toast.makeText(getActivity().getApplicationContext(),semesterValue+"",Toast.LENGTH_LONG).show();
+
         return view;
     }
 }

@@ -1,5 +1,6 @@
 package com.misis.brs.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,7 @@ public class MarksFragment extends Fragment {
     private EditText description;
     private Button addPoints;
     private MarkViewAdapter markViewAdapter;
+    private Spinner markTypeSpinner;
 
     @Override
     public void onResume() {
@@ -42,6 +45,7 @@ public class MarksFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_points,container,false);
+        markTypeSpinner = (Spinner)getActivity().findViewById(R.id.semester_picker);
 
         mark = (NumberPicker) view.findViewById(R.id.mark_picker);
         maxMark = (NumberPicker) view.findViewById(R.id.max_mark_picker);
@@ -50,15 +54,26 @@ public class MarksFragment extends Fragment {
 
         //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText("");
-        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.VISIBLE);
+        markTypeSpinner.setVisibility(View.VISIBLE);
 
         //изменение spinner
         ArrayAdapter<?> adapter =
                 ArrayAdapter.createFromResource(getActivity(), R.array.types_of_marks_list_even, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.view_mark_type_simple_dropdown_item);
 
-        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setAdapter(adapter);
-        ((Spinner)getActivity().findViewById(R.id.semester_picker)).setSelection(0);
+        markTypeSpinner.setAdapter(adapter);
+        markTypeSpinner.setSelection(1);
+        markTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Vector<Mark> marks = new Vector<>();
         Mark mark = new Mark();
@@ -70,6 +85,11 @@ public class MarksFragment extends Fragment {
         marks.add(mark);
         markViewAdapter = new MarkViewAdapter(getActivity(),marks);
         ((ListView) view.findViewById(R.id.points_list)).setAdapter(markViewAdapter);
+
+        //TODO удалить после отладки
+        SharedPreferences  pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+        int semesterValue = pref.getInt("semester", 1);
+        Toast.makeText(getActivity().getApplicationContext(),semesterValue+"",Toast.LENGTH_LONG).show();
 
         return view;
     }
