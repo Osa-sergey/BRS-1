@@ -39,6 +39,7 @@ public class HometasksFragment extends Fragment {
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText("");
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
 
+        //обработка адаптера
         Vector<Hometask> hometasks = new Vector<>();
         Hometask ht = new Hometask(1563543062);
         ht.setCheckDone(true);
@@ -47,6 +48,7 @@ public class HometasksFragment extends Fragment {
 
         hometasks.add(ht);
         hometasks.add(ht);
+
         hometasksViewAdapter = new HometasksViewAdapter(getActivity(),hometasks);
         ((ListView) view.findViewById(R.id.tasks_list)).setAdapter(hometasksViewAdapter);
 

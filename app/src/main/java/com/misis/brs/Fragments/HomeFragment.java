@@ -26,6 +26,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        //для корректного отображения выбранного пункта меню
         ((MainActivity) getActivity()).bottomMenuStick(1);
     //TODO удалить после отладки
 
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
         adapter.setDropDownViewResource(R.layout.view_semester_simple_dropdown_item);
         semester.setAdapter(adapter);
 
+        //поиск и инициализация записи о семестре
         pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         if (!pref.contains("semester"))
         {

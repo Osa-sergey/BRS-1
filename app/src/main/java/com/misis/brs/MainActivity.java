@@ -15,7 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 import android.app.Fragment;
 
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
 
+    //закрыта ли секция с экстра информацией в боковом меню
     private Boolean isClosed;
 
     private LinearLayout extraInfo;
@@ -61,16 +61,29 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        isClosed=true;
-
         navigationView = findViewById(R.id.nav_view);
         bottomNavigationView = findViewById(R.id.nav_view_bottom);
 
         //инициализируем БД
         dbHelper = DBHelper.getInstance(getApplicationContext(),"test");
+
+        //обрабатываем header бокового меню
         ibDropdown = navigationView.getHeaderView(0).findViewById(R.id.extraInfoButton);
         extraInfo = navigationView.getHeaderView(0).findViewById(R.id.extra);
         extraInfo.setVisibility(View.GONE);
+        isClosed=true; //информация скрыта
+
+        //обработка открытия/закрытия доп информации
+        ibDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isClosed)
+                    extraInfo.setVisibility(View.VISIBLE);
+                else
+                    extraInfo.setVisibility(View.GONE);
+                isClosed = !isClosed;
+            }
+        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -80,6 +93,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //инициализируем фрагменты
         contactsFragment = new ContactsFragment();
         homeFragment = new HomeFragment();
         hometasksFragment = new HometasksFragment();
@@ -87,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         newsFragment = new NewsFragment();
         newsViewFragment = new NewsViewFragment();
 
+        //нижнее меню
         llFirstLabel = findViewById(R.id.llMenuFirstLabel);
         llSecondLabel = findViewById(R.id.llMenuSecondLabel);
         llThirdLabel = findViewById(R.id.llMenuThirdLabel);
@@ -112,17 +127,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        ibDropdown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isClosed)
-                    extraInfo.setVisibility(View.VISIBLE);
-                else
-                    extraInfo.setVisibility(View.GONE);
-                isClosed = !isClosed;
-            }
-        });
-
+        //загружаем стартовый фрагмент
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.themaincontainer,homeFragment);
         ft.commit();
@@ -192,6 +197,10 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
+    /**
+     * меняет положение маркера выбора
+     * @param configuration номер с лева на право маркерованного пункта начиная с 1
+     */
     public void bottomMenuStick(int configuration){
         switch (configuration){
             case 1:

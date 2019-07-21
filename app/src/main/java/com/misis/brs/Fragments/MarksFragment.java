@@ -38,6 +38,8 @@ public class MarksFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        //для корректного отображения выбранного пункта меню
         ((MainActivity) getActivity()).bottomMenuStick(2);
     }
 
@@ -75,6 +77,7 @@ public class MarksFragment extends Fragment {
             }
         });
 
+        //обработка адаптера
         Vector<Mark> marks = new Vector<>();
         Mark mark = new Mark();
         mark.setMark(5);
@@ -83,6 +86,7 @@ public class MarksFragment extends Fragment {
         mark.setDescription("dvdvfbfbfbfbdbfdbfdbfdbdfbdfb");
         marks.add(mark);
         marks.add(mark);
+
         markViewAdapter = new MarkViewAdapter(getActivity(),marks);
         ((ListView) view.findViewById(R.id.points_list)).setAdapter(markViewAdapter);
 
