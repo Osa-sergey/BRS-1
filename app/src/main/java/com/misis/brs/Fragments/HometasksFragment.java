@@ -52,11 +52,6 @@ public class HometasksFragment extends Fragment {
         hometasksViewAdapter = new HometasksViewAdapter(getActivity(),hometasks);
         ((ListView) view.findViewById(R.id.tasks_list)).setAdapter(hometasksViewAdapter);
 
-        //TODO удалить после отладки
-        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
-        int semesterValue = pref.getInt("semester", 1);
-        Toast.makeText(getActivity().getApplicationContext(),semesterValue+"",Toast.LENGTH_LONG).show();
-
         return view;
     }
 }

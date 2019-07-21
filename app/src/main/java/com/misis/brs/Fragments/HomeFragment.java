@@ -1,10 +1,8 @@
 package com.misis.brs.Fragments;
 
+import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
@@ -28,10 +28,6 @@ public class HomeFragment extends Fragment {
 
         //для корректного отображения выбранного пункта меню
         ((MainActivity) getActivity()).bottomMenuStick(1);
-    //TODO удалить после отладки
-
-        int semesterValue = pref.getInt("semester", 1);
-        Toast.makeText(getActivity().getApplicationContext(),semesterValue+"",Toast.LENGTH_LONG).show();
     }
 
     @Nullable
