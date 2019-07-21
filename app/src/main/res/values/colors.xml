@@ -44,4 +44,7 @@
     <color name="gradientNumberPickerStartEnd">#80BEDB</color>
     <color name="gradientNumberPickerMiddle">#FFF</color>
     <color name="menuLine">#f8b113</color>
+
+    <color name="chosenNumber">#436271</color>
+    <color name="number">#00ADEE</color>
 </resources>

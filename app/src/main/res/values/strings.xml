@@ -34,7 +34,7 @@
         <item>10th semester</item>
     </string-array>
 
-    <string-array name="types_of_marks_list_odd">
+    <string-array name="types_of_marks_list_even">
         <item>Class Participation(Sept-Oct)</item>
         <item>Class Participation(Nov-Dec)</item>
         <item>Online(Sept-Oct)</item>
@@ -45,7 +45,7 @@
         <item>Final Test/IELTS</item>
     </string-array>
 
-    <string-array name="types_of_marks_list_even">
+    <string-array name="types_of_marks_list_odd">
         <item>Class Participation(Feb-Mar)</item>
         <item>Class Participation(Apr-May)</item>
         <item>Online(Feb-Mar)</item>
