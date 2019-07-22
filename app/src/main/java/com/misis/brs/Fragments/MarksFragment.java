@@ -1,5 +1,7 @@
 package com.misis.brs.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -19,12 +21,14 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.misis.brs.Adapters.MarkViewAdapter;
+import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Mark;
 import com.misis.brs.Database.MarkType;
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 import com.shawnlin.numberpicker.NumberPicker;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 public class MarksFragment extends Fragment {
@@ -35,7 +39,8 @@ public class MarksFragment extends Fragment {
     private Button addPoints;
     private MarkViewAdapter markViewAdapter;
     private Spinner markTypeSpinner;
-    private int flag = 1; // флаг для определения отсутствия переключения между пунктами списка
+    private ListView pointsList;
+    private AlertDialog.Builder builder;
 
     @Override
     public void onResume() {
@@ -51,6 +56,7 @@ public class MarksFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_points,container,false);
         markTypeSpinner = (Spinner)getActivity().findViewById(R.id.semester_picker);
 
+        pointsList = (ListView) view.findViewById(R.id.points_list);
         markPicker = (NumberPicker) view.findViewById(R.id.picker);
         maxMarkPicker = (NumberPicker) view.findViewById(R.id.max_mark_picker);
         description = (EditText) view.findViewById(R.id.description_edit_text);
@@ -96,7 +102,7 @@ public class MarksFragment extends Fragment {
         adapter.setDropDownViewResource(R.layout.view_mark_type_simple_dropdown_item);
 
         markTypeSpinner.setAdapter(adapter);
-        markTypeSpinner.setSelection(1);
+        markTypeSpinner.setSelection(0); // Выставляем спинер на первый элемент(счёт с 0)
         markTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -141,7 +147,6 @@ public class MarksFragment extends Fragment {
                         maxMarkPicker.setMinValue(1);
                         maxMarkPicker.setMaxValue(numsForMaxMarkPicker.length);
                         maxMarkPicker.setDisplayedValues(numsForMaxMarkPicker);
-                        flag++;
                         break;
                     case 4:
                     case 5:
@@ -160,7 +165,6 @@ public class MarksFragment extends Fragment {
                         maxMarkPicker.setMinValue(1);
                         maxMarkPicker.setMaxValue(numsForMaxMarkPicker.length);
                         maxMarkPicker.setDisplayedValues(numsForMaxMarkPicker);
-                        flag++;
                         break;
                     case 6:
                     case 7:
@@ -178,7 +182,6 @@ public class MarksFragment extends Fragment {
                         maxMarkPicker.setMinValue(1);
                         maxMarkPicker.setMaxValue(numsForMaxMarkPicker.length);
                         maxMarkPicker.setDisplayedValues(numsForMaxMarkPicker);
-                        flag++;
                         break;
                 }
             }
@@ -188,7 +191,7 @@ public class MarksFragment extends Fragment {
 
             }
         });
-
+        //обрабатываем нажатие кнопки добавления оценки
         addPoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,6 +221,7 @@ public class MarksFragment extends Fragment {
                         maxMarkValue = 5;
                         break;
                 }
+                //Проверка на корректность ввода
                if (markValue > maxMarkValue)
                 {
                     final Snackbar notificationSnackbar = Snackbar.make(
@@ -228,36 +232,98 @@ public class MarksFragment extends Fragment {
                     notificationSnackbar.show();
                     return;
                 }
+                //создаём добавляемую оценку
                 SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
                 Mark addingMark = new Mark();
                 addingMark.setMaxMark(maxMarkValue);
                 addingMark.setMark(markValue);
                 addingMark.setSemester(pref.getInt("semester", 0));
                 MarkType[] types = MarkType.values();
-                //тк не всегда корректно отрабатывает определение
-                if(flag<2) { //значит мы никуда не заходили
-                    addingMark.setMarkType(MarkType.CLASS_PARTICIPATION_PART_1);
-                }else {
-                    addingMark.setMarkType(types[markTypeSpinner.getSelectedItemPosition()]);
-                }
+                addingMark.setMarkType(types[markTypeSpinner.getSelectedItemPosition()]);
                 addingMark.setDescription(description.getText().toString());
-                Log.d("MyLOG",addingMark.getDescription() + " " + addingMark.getMaxMark() + " " + addingMark.getMark() + " " +addingMark.getSemester() + " " + addingMark.getMarkType().name());
+                //проверяем на возможность добавления
+                int returned = DBHelper.isAbleToAdd(addingMark);
+                //обрабатываем различные случаи переполнения по типу оценки
+                switch (returned){
+                    case 0:
+                        DBHelper.insertMark(addingMark);
+                        Log.d("Success","add");
+                        description.setText("");
+                        break;
+                    case 1:
+                        final Snackbar notificationSnackbar = Snackbar.make(
+                                view,
+                                "Limit exceeded the number of evaluations of this type.",
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar.show();
+                        break;
+                    case 2:
+                        final Snackbar notificationSnackbar1 = Snackbar.make(
+                                view,
+                                "Limit for the number of points for this type of assessment.",
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar1.show();
+                        break;
+                }
+
+                //обновляем список оценок на экране
+                refreshMarkList();
             }
         });
 
-        //обработка адаптера
+        //обработка адаптера. Выводим оценки за семестр при создании вида
         Vector<Mark> marks = new Vector<>();
-        Mark mark = new Mark();
-        mark.setMark(5);
-        mark.setMaxMark(10);
-        mark.setMarkType(MarkType.FINAL_TEST);
-        mark.setDescription("dvdvfbfbfbfbdbfdbfdbfdbdfbdfb");
-        marks.add(mark);
-        marks.add(mark);
-
+        Mark[] bdMarks = DBHelper.selectMarksForSemester(pref.getInt("semester",0));
+        if (bdMarks != null) {
+            marks.addAll(Arrays.asList(bdMarks));
+        }
         markViewAdapter = new MarkViewAdapter(getActivity(),marks);
-        ((ListView) view.findViewById(R.id.points_list)).setAdapter(markViewAdapter);
-
+        pointsList.setAdapter(markViewAdapter);
+        //обработка удаления записи об оценке
+        pointsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                //создаём диалог
+                builder = new AlertDialog.Builder(getActivity());//необходим именно этот метод другой вариант взятия контекста не работает
+                builder.setTitle(R.string.title);
+                builder.setMessage(R.string.message);
+                //удаляем запись
+                builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DBHelper.deleteMarkById(((Mark)markViewAdapter.getItem(position)).getId());
+                        //обновляем список
+                        refreshMarkList();
+                    }
+                });
+                //не удадяем запись
+                builder.setNegativeButton(R.string.reject, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //ничего не делаем
+                    }
+                });
+                builder.setCancelable(true);
+                builder.create();
+                builder.show();
+                return false;
+            }
+        });
         return view;
+    }
+
+    private void refreshMarkList() {
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+        //подгружаем записи из БД
+        Mark[] bdMarks = DBHelper.selectMarksForSemester(pref.getInt("semester",0));
+        Vector<Mark> marks = new Vector<>();
+        if (bdMarks != null) {
+            marks = new Vector<>(Arrays.asList(bdMarks));
+        }
+        MarkViewAdapter.setMarks(marks);
+        //говорим об изменении массива для перерисовки
+        markViewAdapter.notifyDataSetChanged();
     }
 }
