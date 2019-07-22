@@ -20,6 +20,8 @@
     <string name="maximum_points">Maximum points</string>
     <string name="description">Description</string>
     <string name="add_points">Add points</string>
+    <string name="title">Deleting mark</string>
+
 
     <string-array name="semesters_list">
         <item>1st semester</item>
@@ -65,6 +67,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="message">Delete the selected mark?</string>
+    <string name="accept">Yes</string>
+    <string name="reject">No</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -72,6 +77,8 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+
 
 </resources>
 

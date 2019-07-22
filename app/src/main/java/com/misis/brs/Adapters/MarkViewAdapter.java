@@ -15,7 +15,6 @@ import java.util.Vector;
 public class MarkViewAdapter extends BaseAdapter{
 
     private Context context;
-    private int selectedMark = -1;
     private static Vector<Mark> marks;
 
     public static Vector<Mark> getMarks() {
@@ -31,11 +30,6 @@ public class MarkViewAdapter extends BaseAdapter{
         this.context = context;
         this.marks = marks;
 
-    }
-
-    public void setSelectedMark(int selectedMark)
-    {
-        this.selectedMark = selectedMark;
     }
 
     @Override
