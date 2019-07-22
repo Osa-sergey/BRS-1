@@ -60,7 +60,7 @@
         android:id="@+id/max_mark_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="73dp"
         app:np_width="150dp"
         app:np_height="36dp"
         app:np_dividerColor="@color/colorPrimary"
