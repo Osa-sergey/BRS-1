@@ -20,7 +20,7 @@
     <string name="maximum_points">Maximum points</string>
     <string name="description">Description</string>
     <string name="add_points">Add points</string>
-    <string name="title">Deleting mark</string>
+    <string name="title">Deleting points...</string>
 
 
     <string-array name="semesters_list">
@@ -67,7 +67,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="message">Delete the selected mark?</string>
+    <string name="message">Confirm delete?</string>
     <string name="accept">Yes</string>
     <string name="reject">No</string>
 
