@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorActivityBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="99dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cs_email"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="120dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="108dp"
+                android:layout_weight="2"
+                android:text="@string/email"
+                android:textSize="18sp"
+                android:fontFamily="Roboto"
+                android:textColor="@color/colorTextEmail"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="43dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cs_cellphone"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="120dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="108dp"
+                android:layout_weight="2"
+                android:text="@string/phone"
+                android:textSize="18sp"
+                android:fontFamily="Roboto"
+                android:textColor="@color/colorPhone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="111dp"
+            android:text="@string/join"
+            android:textSize="20sp"
+            android:fontFamily="Roboto"
+            android:textColor="@color/colorTextJoin"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="32dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cs_instagram"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="120dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="123dp"
+                android:layout_weight="2"
+                android:text="@string/instagram"
+                android:textSize="18sp"
+                android:fontFamily="Roboto"
+                android:textColor="@color/colorInstagram"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
