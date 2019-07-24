@@ -70,6 +70,8 @@ public class HomeFragment extends Fragment {
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("semester", position + 1); //так как считается с 0
                 editor.apply();
+                //пересчитываем сумму для выбранного семестра
+                scoreSum();
             }
 
             @Override
