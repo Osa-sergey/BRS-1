@@ -26,7 +26,7 @@ import android.widget.Toast;
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
-import com.misis.brs.Fragments.HometasksFragment;
+import com.misis.brs.Fragments.HometaskFragment;
 import com.misis.brs.Fragments.MarksFragment;
 import com.misis.brs.Fragments.NewsFragment;
 import com.misis.brs.Fragments.NewsViewFragment;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     private ContactsFragment contactsFragment;
     private HomeFragment homeFragment;
-    private HometasksFragment hometasksFragment;
+    private HometaskFragment hometaskFragment;
     private MarksFragment marksFragment;
     private NewsFragment newsFragment;
     private NewsViewFragment newsViewFragment;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         //инициализируем фрагменты
         contactsFragment = new ContactsFragment();
         homeFragment = new HomeFragment();
-        hometasksFragment = new HometasksFragment();
+        hometaskFragment = new HometaskFragment();
         marksFragment = new MarksFragment();
         newsFragment = new NewsFragment();
         newsViewFragment = new NewsViewFragment();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
                         bottomMenuStick(2);
                         return true;
                     case R.id.navigation_hometask:
-                        replaceFragment(R.id.themaincontainer,hometasksFragment);
+                        replaceFragment(R.id.themaincontainer,hometaskFragment);
                         bottomMenuStick(3);
                         return true;
                 }
