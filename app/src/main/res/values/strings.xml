@@ -20,7 +20,8 @@
     <string name="maximum_points">Maximum points</string>
     <string name="description">Description</string>
     <string name="add_points">Add points</string>
-    <string name="title">Deleting points...</string>
+    <string name="pointDialogTitle">Deleting points...</string>
+    <string name="hometaskDialogTitle">Deleting hometask...</string>
 
 
     <string-array name="semesters_list">

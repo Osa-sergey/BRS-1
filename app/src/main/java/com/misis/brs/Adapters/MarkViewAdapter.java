@@ -17,19 +17,15 @@ public class MarkViewAdapter extends BaseAdapter{
     private Context context;
     private static Vector<Mark> marks;
 
-    public static Vector<Mark> getMarks() {
-        return marks;
-    }
-
-    public static void setMarks(Vector<Mark> marks) {
-        MarkViewAdapter.marks = marks;
-    }
-
     public MarkViewAdapter(Context context, Vector<Mark> marks)
     {
         this.context = context;
         this.marks = marks;
 
+    }
+
+    public static void setMarks(Vector<Mark> marks) {
+        MarkViewAdapter.marks = marks;
     }
 
     @Override
