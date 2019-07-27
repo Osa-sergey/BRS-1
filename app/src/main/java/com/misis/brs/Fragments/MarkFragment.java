@@ -31,7 +31,7 @@ import com.shawnlin.numberpicker.NumberPicker;
 import java.util.Arrays;
 import java.util.Vector;
 
-public class MarksFragment extends Fragment {
+public class MarkFragment extends Fragment {
 
     private NumberPicker markPicker;
     private NumberPicker maxMarkPicker;
@@ -287,7 +287,7 @@ public class MarksFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 //создаём диалог
                 builder = new AlertDialog.Builder(getActivity());//необходим именно этот метод другой вариант взятия контекста не работает
-                builder.setTitle(R.string.title);
+                builder.setTitle(R.string.pointDialogTitle);
                 builder.setMessage(R.string.message);
                 //удаляем запись
                 builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
