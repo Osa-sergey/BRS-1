@@ -27,7 +27,7 @@ import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometaskFragment;
-import com.misis.brs.Fragments.MarksFragment;
+import com.misis.brs.Fragments.MarkFragment ;
 import com.misis.brs.Fragments.NewsFragment;
 import com.misis.brs.Fragments.NewsViewFragment;
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
     private ContactsFragment contactsFragment;
     private HomeFragment homeFragment;
     private HometaskFragment hometaskFragment;
-    private MarksFragment marksFragment;
+    private MarkFragment  marksFragment;
     private NewsFragment newsFragment;
     private NewsViewFragment newsViewFragment;
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         contactsFragment = new ContactsFragment();
         homeFragment = new HomeFragment();
         hometaskFragment = new HometaskFragment();
-        marksFragment = new MarksFragment();
+        marksFragment = new MarkFragment ();
         newsFragment = new NewsFragment();
         newsViewFragment = new NewsViewFragment();
 
