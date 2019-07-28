@@ -16,7 +16,6 @@
     <string name="turn_on_notifications">Turn on notifications</string>
     <string name="appropriate_time">Appropriate time</string>
     <string name="ok">OK</string>
-    <string name="your_points">Your points</string>
     <string name="maximum_points">Maximum points</string>
     <string name="description">Description</string>
     <string name="add_points">Add points</string>
@@ -72,13 +71,9 @@
     <string name="message">Confirm delete?</string>
     <string name="accept">Yes</string>
     <string name="reject">No</string>
-
+    <string name="your_points">Your points</string>
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="your_hometask">Tools</string>
     <string name="selected_language">Selected language</string>
     <string name="notifications">Notifications</string>
 
