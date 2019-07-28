@@ -30,6 +30,7 @@ import com.misis.brs.Fragments.HometaskFragment;
 import com.misis.brs.Fragments.MarkFragment ;
 import com.misis.brs.Fragments.NewsFragment;
 import com.misis.brs.Fragments.NewsViewFragment;
+import com.misis.brs.Fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private MarkFragment  marksFragment;
     private NewsFragment newsFragment;
     private NewsViewFragment newsViewFragment;
+    private SettingsFragment settingsFragment;
 
     private ImageButton ibDropdown;
 
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity
         marksFragment = new MarkFragment ();
         newsFragment = new NewsFragment();
         newsViewFragment = new NewsViewFragment();
+        settingsFragment = new SettingsFragment();
 
         //нижнее меню
         llFirstLabel = findViewById(R.id.llMenuFirstLabel);
@@ -172,7 +175,7 @@ public class MainActivity extends AppCompatActivity
                     //
                     break;
                 case R.id.Settings:
-                    //
+                    replaceFragment(R.id.themaincontainer,settingsFragment);
                     break;
             }
 

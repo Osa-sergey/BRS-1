@@ -16,7 +16,6 @@ import com.misis.brs.Adapters.NewsViewAdapter;
 import com.misis.brs.Database.News;
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
-import com.misis.brs.TimeHelper;
 
 import java.util.Vector;
 
