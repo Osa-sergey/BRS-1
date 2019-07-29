@@ -82,5 +82,6 @@
     <string name="snackbarHigherMax">Mark can not be higher than the maximum.</string>
     <string name="snackbarLimitCount">Limit exceeded the number of evaluations of this type.</string>
     <string name="snackbarLimitPoints">Limit for the number of points for this type of assessment.</string>
+    <string name="snackbarEmptyText">Hometask is empty</string>
 </resources>
 

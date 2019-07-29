@@ -83,5 +83,6 @@
     <string name="snackbarHigherMax">Оценка не может быть больше максимальной.</string>
     <string name="snackbarLimitCount">Привышен лимит количества оценок этого типа</string>
     <string name="snackbarLimitPoints">Привышен лимит количества баллов этого типа</string>
+    <string name="snackbarEmptyText">Домашнее задание пусто</string>
 </resources>
 
