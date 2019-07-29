@@ -1,6 +1,7 @@
 package com.misis.brs.Fragments;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,7 +36,10 @@ public class HometaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //TODO раскомментировать после добавки сохранения в бд
+        //refreshHometaskList();
         ((MainActivity) getActivity()).bottomMenuStick(3);
+
     }
 
     @Nullable
@@ -51,17 +55,28 @@ public class HometaskFragment extends Fragment {
         addHometask = (FloatingActionButton) view.findViewById(R.id.addButton);
 
         //обработка адаптер. Выводим спиоск дз при создании вида
-        Vector<Hometask> hometasks = new Vector<>();
-        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+        final Vector<Hometask> hometasks = new Vector<>();
+        Hometask ht = new Hometask(1564351428);
+        ht.setCheckDone(false);
+        ht.setCheckNotify(true);
+        ht.setDescription("Writing Blog");
+
+        hometasks.add(ht);
+
+        //TODO раскомментировать после добавления создания дз
+        /*SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         Hometask[] bdHometasks = DBHelper.selectHometaskForSemester(pref.getInt("semester",0));
         if (bdHometasks != null) {
             hometasks.addAll(Arrays.asList(bdHometasks));
         }
+        */
         hometasksViewAdapter = new HometaskViewAdapter(getActivity(),hometasks);
         hometaskList.setAdapter(hometasksViewAdapter);
+        //удаление по долгому нажатию
         hometaskList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
                 builder = new AlertDialog.Builder(getActivity());//необходим именно этот метод другой вариант взятия контекста не работает
                 builder.setTitle(R.string.hometaskDialogTitle);
                 builder.setMessage(R.string.message);
@@ -69,9 +84,10 @@ public class HometaskFragment extends Fragment {
                 builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DBHelper.deleteHometaskByDeadline(((Hometask)hometasksViewAdapter.getItem(position)).getDeadline());
+                        //TODO раскомментировать после добавки сохранения в бд
+                        //DBHelper.deleteHometaskByDeadline(((Hometask)hometasksViewAdapter.getItem(position)).getDeadline());
                         //обновляем список
-                        refreshHometaskList();
+                        //refreshHometaskList();
                     }
                 });
                 //не удадяем запись
@@ -84,7 +100,27 @@ public class HometaskFragment extends Fragment {
                 builder.setCancelable(true);
                 builder.create();
                 builder.show();
-                return false;
+                return true; // такое значение нужно, чтобы при долгом нажатии так же не срабатывал и слушатель короткого нажатия
+            }
+        });
+
+        //просмотр и редактирование по нажатию
+        hometaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //создаём экземпляр класса для замены на него
+                //через bundle передаём необходимые для отображения переменные
+                HometaskViewEditFragment htView = new HometaskViewEditFragment();
+                Bundle args = new Bundle();
+                args.putLong("deadline",hometasks.elementAt(position).getDeadline());
+                args.putString("description",hometasks.elementAt(position).getDescription());
+                args.putBoolean("checkDone",hometasks.elementAt(position).getCheckDone());
+                args.putBoolean("checkNotif",hometasks.elementAt(position).getCheckNotify());
+                args.putInt("semester",hometasks.elementAt(position).getSemester());
+                args.putLong("timeNotif",hometasks.elementAt(position).getTimeNotification());
+                htView.setArguments(args);
+
+                ((MainActivity) getActivity()).replaceFragment(R.id.themaincontainer,htView);
             }
         });
 
@@ -98,7 +134,7 @@ public class HometaskFragment extends Fragment {
         return view;
     }
 
-    private void refreshHometaskList() {
+    public void refreshHometaskList() {
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         //подгружаем записи из БД
         Hometask[] bdHometasks = DBHelper.selectHometaskForSemester(pref.getInt("semester",0));

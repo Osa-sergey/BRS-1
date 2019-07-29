@@ -21,7 +21,9 @@
     <string name="add_points">Add points</string>
     <string name="pointDialogTitle">Deleting points...</string>
     <string name="hometaskDialogTitle">Deleting hometask...</string>
-    
+    <string name="hometaskEditDialogTitle">Editing hometask...</string>
+    <string name="messageEdit">Confirm edit?</string>
+
     <string-array name="language_list">
         <item>Русский</item>
         <item>English</item>

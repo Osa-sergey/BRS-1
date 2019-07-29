@@ -21,6 +21,8 @@
     <string name="add_points">Добавить баллы</string>
     <string name="pointDialogTitle">Удаление баллов...</string>
     <string name="hometaskDialogTitle">Удаление домашнего задания...</string>
+    <string name="hometaskEditDialogTitle">Изменение домашнего задания...</string>
+    <string name="messageEdit">Подтвердить изменение?</string>
     
     <string-array name="language_list">
         <item>Русский</item>
