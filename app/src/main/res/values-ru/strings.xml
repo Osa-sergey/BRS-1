@@ -80,5 +80,8 @@
     <string name="selected_language">Выбранный язык</string>
     <string name="notifications">Уведомления</string>
 
+    <string name="snackbarHigherMax">Оценка не может быть больше максимальной.</string>
+    <string name="snackbarLimitCount">Привышен лимит количества оценок этого типа</string>
+    <string name="snackbarLimitPoints">Привышен лимит количества баллов этого типа</string>
 </resources>
 
