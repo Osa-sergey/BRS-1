@@ -219,11 +219,11 @@ public class DBHelper {
         task.execute(news1);
     }
 
-    public static void deleteNewsbyDateNews(final long dateNews){
+    public static void deleteNewsByDateNews(final long dateNews){
         AsyncTask<Long, Void, Void> task = new AsyncTask<Long, Void, Void>() {
             @Override
             protected Void doInBackground(Long... longs) {
-                instance.db.newsDao().deletebyDateNews(dateNews);
+                instance.db.newsDao().deleteByDateNews(dateNews);
                 return null;
             }
         };
