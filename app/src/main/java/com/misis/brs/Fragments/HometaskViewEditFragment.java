@@ -3,11 +3,13 @@ package com.misis.brs.Fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,12 +20,14 @@ import androidx.annotation.Nullable;
 
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Hometask;
+import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 import com.misis.brs.TimeHelper;
 
 public class HometaskViewEditFragment extends Fragment {
     private Hometask hometask;
     private AlertDialog.Builder builder;
+    private Button editBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,12 +49,18 @@ public class HometaskViewEditFragment extends Fragment {
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(TimeHelper.getTime(hometask.getDeadline()));
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
 
+        ((MainActivity) getActivity()).emptyBottomMenu();
+
         final EditText description = (EditText) view.findViewById(R.id.textHometask);
         description.setText(hometask.getDescription());
-
-        ((Button) view.findViewById(R.id.saveButton)).setOnClickListener(new View.OnClickListener() {
+        editBtn = (Button) view.findViewById(R.id.saveButton);
+        editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //скрываем клавиатуру
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editBtn.getWindowToken(), 0);
+
                 final FragmentManager fm = getActivity().getFragmentManager();
                 builder = new AlertDialog.Builder(getActivity());//необходим именно этот метод другой вариант взятия контекста не работает
                 builder.setTitle(R.string.hometaskEditDialogTitle);
