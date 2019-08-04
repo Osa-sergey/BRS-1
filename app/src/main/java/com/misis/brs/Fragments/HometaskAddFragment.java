@@ -2,11 +2,15 @@ package com.misis.brs.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,6 +30,7 @@ import java.util.Locale;
 public class HometaskAddFragment extends Fragment {
 
     private long deadline;
+    private Button add;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,12 +51,16 @@ public class HometaskAddFragment extends Fragment {
         ((MainActivity) getActivity()).emptyBottomMenu();
 
         final EditText text = ((EditText) view.findViewById(R.id.textHometask));
-        Button add = ((Button) view.findViewById(R.id.saveButton));
+        add = ((Button) view.findViewById(R.id.saveButton));
         final FragmentManager fm = getActivity().getFragmentManager();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //скрываем клавиатуру
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(add.getWindowToken(), 0);
+
                 if(text.getText().toString().equals("")){
                     final Snackbar notificationSnackbar = Snackbar.make(
                             v,
@@ -68,18 +77,35 @@ public class HometaskAddFragment extends Fragment {
 
                     SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
                     addingHometask.setSemester(pref.getInt("semester",0));
-                    // минус 9 часов ставим в 15:00
-                    long notifyTime = addingHometask.getDeadline()-32400;
+                    // минус 12 часов ставим в 15:00 с учётом сдвига на +3 ( GMT+03:00)
+                    long notifyTime = addingHometask.getDeadline()-43200;
                     //отключаем нотификацию, если ее время прошло
-                    if(notifyTime < TimeHelper.currentTime()/1000)
+                    if(notifyTime < TimeHelper.currentTime()/1000){
                         addingHometask.setCheckNotify(false);
+                    }
 
                     addingHometask.setTimeNotification(notifyTime);
                     DBHelper.insertHometask(addingHometask);
-                    //TODO включить ноификацию
+                    //TODO пока этот код не работает для больших интервалов времени
                     if(addingHometask.getCheckNotify()){
+                        NotificationManager nm = (NotificationManager) getActivity().
+                                getApplicationContext().
+                                getSystemService(Context.NOTIFICATION_SERVICE);
 
+                        Notification.Builder builder = new Notification.Builder(getActivity().
+                                getApplicationContext());
+                        builder
+                                .setSmallIcon(R.drawable.ic_bn_tasks)
+                                .setTicker("BRS hometask deadline")
+                                .setContentTitle("Deadline")
+                                .setContentText(addingHometask.getDescription())
+                                .setWhen(addingHometask.getTimeNotification()*1000)
+                                .setAutoCancel(true);
+                        Notification notification = builder.build();
+                        nm.notify((int) addingHometask.getTimeNotification(),notification);
                     }
+
+
                     //выписываем время нотификации
                     //добавляем поддержку языков
                     String lang = Locale.getDefault().getDisplayLanguage();
