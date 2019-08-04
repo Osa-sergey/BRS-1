@@ -1,6 +1,7 @@
 package com.misis.brs;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Класс помощник для перевода unix времени в строковое представление
@@ -32,5 +33,16 @@ public class TimeHelper {
         int mHour = calendar.get(Calendar.HOUR);
         int mMin = calendar.get(Calendar.MINUTE);
         return mHour+":"+mMin+" "+mDay+"."+mMonth+"."+mYear;
+    }
+
+    public static long currentTime(){
+        return System.currentTimeMillis();
+    }
+
+    public static long currentTime(int year, int month, int dayOfMonth){
+        TimeZone tz = TimeZone.getTimeZone("Europe/Moscow");
+        Calendar calendar = Calendar.getInstance(tz);
+        calendar.set(year,month,dayOfMonth);
+        return calendar.getTimeInMillis();
     }
 }

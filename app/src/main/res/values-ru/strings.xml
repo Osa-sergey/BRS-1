@@ -84,5 +84,7 @@
     <string name="snackbarLimitCount">Привышен лимит количества оценок этого типа</string>
     <string name="snackbarLimitPoints">Привышен лимит количества баллов этого типа</string>
     <string name="snackbarEmptyText">Домашнее задание пусто</string>
+
+    <string name="CalendarBatton">Добавить новое задание</string>
 </resources>
 

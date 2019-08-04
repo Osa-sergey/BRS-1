@@ -83,5 +83,7 @@
     <string name="snackbarLimitCount">Limit exceeded the number of evaluations of this type.</string>
     <string name="snackbarLimitPoints">Limit for the number of points for this type of assessment.</string>
     <string name="snackbarEmptyText">Hometask is empty</string>
+
+    <string name="CalendarBatton">Add new task</string>
 </resources>
 

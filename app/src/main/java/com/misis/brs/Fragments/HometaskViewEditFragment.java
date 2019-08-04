@@ -68,8 +68,7 @@ public class HometaskViewEditFragment extends Fragment {
                             builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //TODO раскомментировать после добавки сохранения в бд
-                                    //DBHelper.deleteHometaskByDeadline(((Hometask)hometasksViewAdapter.getItem(position)).getDeadline());
+                                    DBHelper.deleteHometaskByDeadline(hometask.getDeadline());
                                     fm.popBackStack();
                                 }
                             });
@@ -86,8 +85,7 @@ public class HometaskViewEditFragment extends Fragment {
                         }else {
                             //сохраняем изменения в бд
                             hometask.setDescription(description.getText().toString());
-                            //TODO раскомментировать после добавки сохранения в бд
-                            //DBHelper.updateHometask(hometask);
+                            DBHelper.updateHometask(hometask);
                             //откатываемся назад ко всем дз
                             fm.popBackStack();
                         }

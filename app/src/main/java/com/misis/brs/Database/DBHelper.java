@@ -180,6 +180,23 @@ public class DBHelper {
         }return null;
     }
 
+    public static Hometask selectHometaskByDate(final long deadline){
+        AsyncTask<Long, Void, Hometask> task = new AsyncTask<Long, Void, Hometask>() {
+            @Override
+            protected Hometask doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectHometaskByDate(deadline);
+            }
+        };
+        task.execute(deadline);
+        try{
+            return task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        }return null;
+    }
+
     public static void deleteHometaskByDeadline(final long deadline){
         AsyncTask<Long, Void, Void> task = new AsyncTask<Long, Void, Void>() {
             @Override

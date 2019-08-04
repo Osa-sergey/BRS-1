@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.snackbar.Snackbar;
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Hometask;
+import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 import com.misis.brs.TimeHelper;
 
@@ -40,6 +41,9 @@ public class HometaskAddFragment extends Fragment {
         //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(TimeHelper.getTime(deadline));
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
+
+        //нижнее меню
+        ((MainActivity) getActivity()).emptyBottomMenu();
 
         final EditText text = ((EditText) view.findViewById(R.id.textHometask));
         Button add = ((Button) view.findViewById(R.id.saveButton));
@@ -65,28 +69,37 @@ public class HometaskAddFragment extends Fragment {
                     SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
                     addingHometask.setSemester(pref.getInt("semester",0));
                     // минус 9 часов ставим в 15:00
-                    addingHometask.setTimeNotification(addingHometask.getDeadline()-32400);
+                    long notifyTime = addingHometask.getDeadline()-32400;
+                    //отключаем нотификацию, если ее время прошло
+                    if(notifyTime < TimeHelper.currentTime()/1000)
+                        addingHometask.setCheckNotify(false);
+
+                    addingHometask.setTimeNotification(notifyTime);
                     DBHelper.insertHometask(addingHometask);
                     //TODO включить ноификацию
+                    if(addingHometask.getCheckNotify()){
 
+                    }
                     //выписываем время нотификации
                     //добавляем поддержку языков
                     String lang = Locale.getDefault().getDisplayLanguage();
-                    String notif = "";
-                    switch (lang){
-                        case "English":
-                            notif = "Notification will be in " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
-                            break;
-                        case "русский":
-                            notif = "Уведомление будет в " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
-                            break;
+                    String notify = "";
+                    if(addingHometask.getCheckNotify()) {
+                        switch (lang) {
+                            case "English":
+                                notify = "Notification will be in " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
+                                break;
+                            case "русский":
+                                notify = "Уведомление будет в " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
+                                break;
+                        }
+                        final Snackbar notificationSnackbar = Snackbar.make(
+                                v,
+                                notify,
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar.show();
                     }
-                    final Snackbar notificationSnackbar = Snackbar.make(
-                            v,
-                           notif,
-                            Snackbar.LENGTH_LONG
-                    );
-                    notificationSnackbar.show();
                     //откатываемся в начало
                     fm.popBackStack();
                     fm.popBackStack();

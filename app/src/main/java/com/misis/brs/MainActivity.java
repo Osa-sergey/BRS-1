@@ -223,4 +223,9 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
+    public void emptyBottomMenu(){
+        llFirstLabel.setVisibility(View.GONE);
+        llSecondLabel.setVisibility(View.GONE);
+        llThirdLabel.setVisibility(View.GONE);
+    }
 }

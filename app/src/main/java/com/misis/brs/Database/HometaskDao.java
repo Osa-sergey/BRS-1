@@ -43,4 +43,7 @@ public interface HometaskDao {
     @Query("DELETE FROM hometask WHERE deadline = :deadline")
     void deleteByDeadline(long deadline);
 
+    @Query("SELECT * FROM hometask WHERE deadline = :deadline")
+    Hometask selectHometaskByDate(long deadline);
+
 }
