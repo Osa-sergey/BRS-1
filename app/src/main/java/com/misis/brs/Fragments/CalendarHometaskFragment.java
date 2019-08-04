@@ -2,7 +2,6 @@ package com.misis.brs.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +69,8 @@ public class CalendarHometaskFragment extends Fragment {
             public void onClick(View v) {
                 Bundle arg = new Bundle();
                 long time = TimeHelper.currentTime(curYear,curMonth,curDay);
+                if(curYear == 0)
+                    time = TimeHelper.currentTime();
                 //делаем начало дня в сек
                 arg.putLong("date",(time - time%86400000)/1000);
                 HometaskAddFragment haf = new HometaskAddFragment();
@@ -87,7 +88,6 @@ public class CalendarHometaskFragment extends Fragment {
      */
     private void configur(long curDate){
         text.setText(TimeHelper.getTime(curDate/1000));
-        Log.d("setTime",((curDate-curDate%86400000)/1000)+"");
         Hometask hometask = DBHelper.selectHometaskByDate((curDate-curDate%86400000)/1000); //настройка на  начало дня 00:00
         if( hometask == null){
             card.setVisibility(View.GONE);
