@@ -122,14 +122,14 @@ public class MarkFragment extends Fragment {
                         for(int i=0;i<numsForMarkPicker.length;i++){
                             numsForMarkPicker[i] = Integer.toString(i);
                         }
+                        markPicker.setDisplayedValues(numsForMarkPicker);
                         markPicker.setMinValue(1);
                         markPicker.setMaxValue(numsForMarkPicker.length);
-                        markPicker.setDisplayedValues(numsForMarkPicker);
                         markPicker.setValue(6);
 
+                        maxMarkPicker.setDisplayedValues(numsForMaxMarkPicker);
                         maxMarkPicker.setMinValue(1);
                         maxMarkPicker.setMaxValue(numsForMaxMarkPicker.length);
-                        maxMarkPicker.setDisplayedValues(numsForMaxMarkPicker);
                         maxMarkPicker.setValue(5);
                         break;
                     case 2:
@@ -140,9 +140,9 @@ public class MarkFragment extends Fragment {
                         numsForMarkPicker = new String[11];
                         for(int i=0;i<numsForMarkPicker.length;i++)
                             numsForMarkPicker[i]=Integer.toString(i);
+                        markPicker.setDisplayedValues(numsForMarkPicker);
                         markPicker.setMinValue(1);
                         markPicker.setMaxValue(numsForMarkPicker.length);
-                        markPicker.setDisplayedValues(numsForMarkPicker);
                         markPicker.setValue(11);
 
                         maxMarkPicker.setMinValue(1);
@@ -157,7 +157,6 @@ public class MarkFragment extends Fragment {
                         numsForMarkPicker = new String[6];
                         for(int i=0;i<numsForMarkPicker.length;i++)
                             numsForMarkPicker[i]=Integer.toString(i);
-
                         markPicker.setMinValue(1);
                         markPicker.setMaxValue(numsForMarkPicker.length);
                         markPicker.setDisplayedValues(numsForMarkPicker);
