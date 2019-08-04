@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                     replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
                 case R.id.BugReport:
-                    // TODO: Добавить баг репорт
+
                     break;
                 case R.id.Help:
                     //

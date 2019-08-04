@@ -24,7 +24,8 @@ public class TimeHelper {
     }
 
     public static String getNotifTime(long sec){
-        Calendar calendar = Calendar.getInstance();
+        TimeZone tz = TimeZone.getTimeZone("Europe/Moscow");
+        Calendar calendar = Calendar.getInstance(tz);
         calendar.setTimeInMillis(sec*1000);
 
         int mYear = calendar.get(Calendar.YEAR);
