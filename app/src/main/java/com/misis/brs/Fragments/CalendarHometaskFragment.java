@@ -28,7 +28,9 @@ public class CalendarHometaskFragment extends Fragment {
     private TextView task;
     private CardView card;
     private TextView text;
-
+    private int curYear;
+    private int curMonth;
+    private  int curDay;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -58,13 +60,16 @@ public class CalendarHometaskFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 configur(TimeHelper.currentTime(year, month, dayOfMonth));
+                curYear = year;
+                curMonth = month;
+                curDay = dayOfMonth;
             }
         });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle arg = new Bundle();
-                long time = TimeHelper.currentTime();
+                long time = TimeHelper.currentTime(curYear,curMonth,curDay);
                 //делаем начало дня в сек
                 arg.putLong("date",(time - time%86400000)/1000);
                 HometaskAddFragment haf = new HometaskAddFragment();
