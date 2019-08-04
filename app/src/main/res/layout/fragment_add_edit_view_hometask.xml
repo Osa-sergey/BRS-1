@@ -16,6 +16,7 @@
         android:fontFamily="Roboto"
         android:textColor="@color/colorTextFragment"
         android:textSize="18sp"
+        android:inputType="textCapSentences|textAutoCorrect"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintTop_toTopOf="parent"/>
 
