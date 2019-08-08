@@ -53,18 +53,27 @@ public class NewsFragment extends Fragment {
        //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.news_toolbar);
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
+        long curDate = TimeHelper.currentTime()/1000;
+        //удаляем новости со времени публикации которых прошло больше недели
+        DBHelper.deleteNewsByDateNews(curDate-604800);
 
+        News[] bdNews = DBHelper.selectAllNews();
+        Vector<News> news = new Vector<>();
+        if (bdNews != null) {
+            news = new Vector<>(Arrays.asList(bdNews));
+        }
         newsViewAdapter = new NewsViewAdapter(getActivity(),news);
         listView =(ListView) view.findViewById(R.id.news_list);
         listView.setAdapter(newsViewAdapter);
+        final Vector<News> finalNews = news;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 NewsViewFragment newsViewFragment = new NewsViewFragment();
                 Bundle args = new Bundle();
-                args.putString("title",news.elementAt(position).getHeader());
-                args.putLong("date", news.elementAt(position).getDateNews());
-                args.putString("text",news.elementAt(position).getDescription());
+                args.putString("title", finalNews.elementAt(position).getHeader());
+                args.putLong("date", finalNews.elementAt(position).getDateNews());
+                args.putString("text", finalNews.elementAt(position).getDescription());
                 newsViewFragment.setArguments(args);
 
                 ((MainActivity) getActivity()).replaceFragment(R.id.themaincontainer,newsViewFragment);
