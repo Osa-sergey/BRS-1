@@ -3,7 +3,7 @@
     <string name="side_menu_news">Новости</string>
     <string name="side_menu_contacts">Контакты</string>
     <string name="side_menu_bug_report">Oтчет об ошибке</string>
-    <string name="side_menu_help">Помощь</string>
+    <string name="side_menu_help">Обновления</string>
     <string name="side_menu_settings">Настройки</string>
     <string name="teacher">Учитель:</string>
     <string name="schedule">Расписание:</string>
@@ -86,5 +86,21 @@
     <string name="snackbarEmptyText">Домашнее задание пусто</string>
 
     <string name="CalendarBatton">Добавить новое задание</string>
+    <string name="side_menu_updates">ОБНОВЛЕНИЯ</string>
+    <string name="what_s_new">Что нового?</string>
+    <string name="version_history">История версий</string>
+
+    <string-array name="update_news">
+        <item>первая версия завершена</item>
+    </string-array>
+
+    <string-array name="versions">
+        <item>1.0.0</item>
+    </string-array>
+
+    <string-array name="date">
+        <item>01.09.2019</item>
+    </string-array>
+
 </resources>
 
