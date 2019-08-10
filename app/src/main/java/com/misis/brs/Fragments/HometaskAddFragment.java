@@ -93,7 +93,6 @@ public class HometaskAddFragment extends Fragment {
 
                     addingHometask.setTimeNotification(notifyTime);
                     DBHelper.insertHometask(addingHometask);
-                    //TODO пока этот код не работает для больших интервалов времени
 
                     startNotification(false);
 

@@ -68,7 +68,6 @@ public class MarkFragment extends Fragment {
         markTypeSpinner.setVisibility(View.VISIBLE);
 
         //настраиваем пикеры
-        //TODO подумать почему вылетает за граници массива
         String[] numsForMaxMarkPicker = new String[20];
         String[] numsForMarkPicker = new String[21];
 
