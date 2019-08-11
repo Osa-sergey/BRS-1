@@ -3,11 +3,11 @@ package com.misis.brs;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,10 +53,11 @@ public class MainActivity extends AppCompatActivity
 
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
+    private DrawerLayout drawer;
 
     //закрыта ли секция с экстра информацией в боковом меню
     private Boolean isClosed;
-
+    private Boolean isOpen = false;
     private LinearLayout extraInfo;
     private LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
 
@@ -104,12 +105,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        drawer = findViewById(R.id.drawer_layout);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
 
         //инициализируем фрагменты
@@ -214,6 +212,7 @@ public class MainActivity extends AppCompatActivity
                 case R.id.Settings:
                     replaceFragment(R.id.themaincontainer,settingsFragment);
                     break;
+
             }
 
             llFirstLabel.setVisibility(View.GONE);
@@ -224,10 +223,20 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawers();
         return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // THIS IS YOUR DRAWER/HAMBURGER BUTTON
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void replaceFragment(int res, Fragment fragment){
