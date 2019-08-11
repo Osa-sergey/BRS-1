@@ -23,8 +23,10 @@
     <Button
         android:id="@+id/addDate"
         android:text="@string/CalendarBatton"
-        android:textSize="16sp"
-        android:textColor="@color/calendarText"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/colorTextButton"
+        android:background="@drawable/shape_button"
         android:fontFamily="@font/robotoregular"
         android:layout_width="327dp"
         android:layout_height="57dp"
