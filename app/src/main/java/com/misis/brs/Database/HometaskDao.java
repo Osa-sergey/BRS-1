@@ -22,7 +22,7 @@ public interface HometaskDao {
     long insert(Hometask hometask);
 
     /**
-     * обновдение дз
+     * обновление дз
      * @param hometask домашнее задание
      * @return количество обновлённых записей
      */
@@ -42,5 +42,8 @@ public interface HometaskDao {
 
     @Query("DELETE FROM hometask WHERE deadline = :deadline")
     void deleteByDeadline(long deadline);
+
+    @Query("SELECT * FROM hometask WHERE deadline = :deadline")
+    Hometask selectHometaskByDate(long deadline);
 
 }
