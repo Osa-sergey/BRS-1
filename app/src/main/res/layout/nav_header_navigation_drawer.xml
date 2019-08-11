@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
-                android:text="student`s name"
+                android:text="@string/student_s_name"
                 android:fontFamily="@font/robotoregular"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:id="@+id/userGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="group"
+            android:text="@string/group"
             android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorStudentsGroup"/>

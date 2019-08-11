@@ -51,4 +51,6 @@
     <color name="calendarText">#7A7A7A</color>
     <color name="calendarBackground">#41C8F4</color>
     <color name="textNote">#FFF</color>
+
+    <color name="hint">#979292</color>
 </resources>

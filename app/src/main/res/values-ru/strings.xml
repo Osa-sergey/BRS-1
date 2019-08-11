@@ -5,7 +5,10 @@
     <string name="side_menu_bug_report">Oтчет об ошибке</string>
     <string name="side_menu_help">Обновления</string>
     <string name="side_menu_settings">Настройки</string>
+    <string name="student_s_name">Имя студента</string>
+    <string name="group">Группа</string>
     <string name="teacher">Учитель:</string>
+    <string name="teacher1">Учитель</string>
     <string name="schedule">Расписание:</string>
     <string name="read_more">Целиком</string>
     <string name="email">english@misis.ru</string>
@@ -89,6 +92,12 @@
     <string name="side_menu_updates">ОБНОВЛЕНИЯ</string>
     <string name="what_s_new">Что нового?</string>
     <string name="version_history">История версий</string>
+    <string name="day_3">День 3</string>
+    <string name="day_2">День 2</string>
+    <string name="day_1">День 1</string>
+    <string name="hintSchedule">Добавить день и аудиторию</string>
+    <string name="hintFIO">Добавить ФИО</string>
+    <string name="hintGroup">Добавить группу</string>
 
     <string-array name="update_news">
         <item>первая версия завершена</item>
