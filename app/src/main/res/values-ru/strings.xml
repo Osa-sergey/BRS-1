@@ -98,6 +98,8 @@
     <string name="hintSchedule">Добавить день и аудиторию</string>
     <string name="hintFIO">Добавить ФИО</string>
     <string name="hintGroup">Добавить группу</string>
+    <string name="teacherName">Иванов Иван Иванович</string>
+    <string name="scheduleExample">Понедельник 1024 \nВторник 1020A \nПятница 1024</string>
 
     <string-array name="update_news">
         <item>первая версия завершена</item>

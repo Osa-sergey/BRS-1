@@ -1,5 +1,6 @@
 package com.misis.brs;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.app.Fragment;
 import android.view.Menu;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.misis.brs.Database.DBHelper;
@@ -29,7 +31,6 @@ import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometaskFragment;
 import com.misis.brs.Fragments.MarkFragment ;
 import com.misis.brs.Fragments.NewsFragment;
-import com.misis.brs.Fragments.NewsViewFragment;
 import com.misis.brs.Fragments.SettingsFragment;
 import com.misis.brs.Fragments.WhatsNewFragment;
 
@@ -41,11 +42,14 @@ public class MainActivity extends AppCompatActivity
     private HometaskFragment hometaskFragment;
     private MarkFragment  marksFragment;
     private NewsFragment newsFragment;
-    private NewsViewFragment newsViewFragment;
     private SettingsFragment settingsFragment;
     private WhatsNewFragment whatsNewFragment;
 
     private ImageButton ibDropdown;
+    private TextView studName;
+    private TextView group;
+    private TextView teacherName;
+    private TextView schedule;
 
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout llFirstLabel, llSecondLabel, llThirdLabel;
 
     private DBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,16 @@ public class MainActivity extends AppCompatActivity
         ibDropdown = navigationView.getHeaderView(0).findViewById(R.id.extraInfoButton);
         extraInfo = navigationView.getHeaderView(0).findViewById(R.id.extra);
         extraInfo.setVisibility(View.GONE);
+
+        //сама информация
+        teacherName = extraInfo.findViewById(R.id.teacherName);
+        schedule = extraInfo.findViewById(R.id.schedule);
+        group = navigationView.getHeaderView(0).findViewById(R.id.userGroup);
+        studName = navigationView.getHeaderView(0).findViewById(R.id.userName);
+
+        //присваиваем значения
+        setHeader();
+
         isClosed=true; //информация скрыта
 
         //обработка открытия/закрытия доп информации
@@ -103,7 +118,6 @@ public class MainActivity extends AppCompatActivity
         hometaskFragment = new HometaskFragment();
         marksFragment = new MarkFragment ();
         newsFragment = new NewsFragment();
-        newsViewFragment = new NewsViewFragment();
         settingsFragment = new SettingsFragment();
         whatsNewFragment = new WhatsNewFragment();
 
@@ -130,13 +144,33 @@ public class MainActivity extends AppCompatActivity
                         return true;
                 }
                 return false;
-            }
+        }
         });
 
         //загружаем стартовый фрагмент
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.themaincontainer,homeFragment);
         ft.commit();
+    }
+
+    public void setHeader() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("Prefs", 0);
+        if(pref.getString("studName", "") != ""){
+            studName.setText(pref.getString("studName", ""));
+        }
+        if(pref.getString("group", "") != ""){
+            group.setText(pref.getString("group", ""));
+        }
+        if(pref.getString("teacherName", "") != ""){
+            teacherName.setText(pref.getString("teacherName", ""));
+        }
+        String str = "";
+        str += pref.getString("day1", "") + "\n";
+        str += pref.getString("day2", "") + "\n";
+        str += pref.getString("day3", "") + "\n";
+        if(!str.equals("\n\n\n")){
+            schedule.setText(str);
+        }
     }
 
 

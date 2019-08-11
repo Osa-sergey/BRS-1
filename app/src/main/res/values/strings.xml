@@ -97,6 +97,8 @@
     <string name="hintSchedule">Add day and lecture room</string>
     <string name="hintFIO">Add FIO</string>
     <string name="hintGroup">Add group</string>
+    <string name="teacherName">Ivanov Ivan Ivanovich</string>
+    <string name="scheduleExample">Monday 1024 \nTuesday 1020A \nFriday 1024</string>
 
     <string-array name="update_news">
         <item>first version complete</item>
