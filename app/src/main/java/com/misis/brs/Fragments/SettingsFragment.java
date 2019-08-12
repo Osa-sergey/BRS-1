@@ -2,6 +2,7 @@ package com.misis.brs.Fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,34 +84,22 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
             switch (v.getId()){
                 case R.id.studNameEdit:
-                    if(studName.getText().toString() != ""){
-                        editor.putString("studName",studName.getText().toString());
-                    }
+                    editor.putString("studName",studName.getText().toString());
                     break;
                 case R.id.groupEdit:
-                    if(group.getText().toString() != ""){
-                        editor.putString("group",group.getText().toString());
-                    }
+                    editor.putString("group",group.getText().toString());
                     break;
                 case R.id.teacherNameEdit:
-                    if(teacherName.getText().toString() != ""){
-                        editor.putString("teacherName",teacherName.getText().toString());
-                    }
+                    editor.putString("teacherName",teacherName.getText().toString());
                     break;
                 case R.id.day1Edit:
-                    if(day1.getText().toString() != ""){
-                        editor.putString("day1",day1.getText().toString());
-                    }
+                    editor.putString("day1",day1.getText().toString());
                     break;
                 case R.id.day2Edit:
-                    if(day2.getText().toString() != ""){
-                        editor.putString("day2",day2.getText().toString());
-                    }
+                    editor.putString("day2",day2.getText().toString());
                     break;
                 case R.id.day3Edit:
-                    if(day3.getText().toString() != ""){
-                        editor.putString("day3",day3.getText().toString());
-                    }
+                    editor.putString("day3",day3.getText().toString());
                     break;
             }
             editor.apply();

@@ -3,7 +3,6 @@ package com.misis.brs;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -153,14 +152,20 @@ public class MainActivity extends AppCompatActivity
 
     public void setHeader() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("Prefs", 0);
-        if(pref.getString("studName", "") != ""){
+        if(!pref.getString("studName", "").equals("")){
             studName.setText(pref.getString("studName", ""));
+        }else {
+            studName.setText(R.string.student_s_name);
         }
-        if(pref.getString("group", "") != ""){
+        if(!pref.getString("group", "").equals("")){
             group.setText(pref.getString("group", ""));
+        }else {
+            group.setText(R.string.group);
         }
-        if(pref.getString("teacherName", "") != ""){
+        if(!pref.getString("teacherName", "").equals("")){
             teacherName.setText(pref.getString("teacherName", ""));
+        }else {
+            teacherName.setText(R.string.teacherName);
         }
         String str = "";
         str += pref.getString("day1", "") + "\n";
@@ -168,6 +173,8 @@ public class MainActivity extends AppCompatActivity
         str += pref.getString("day3", "") + "\n";
         if(!str.equals("\n\n\n")){
             schedule.setText(str);
+        }else {
+            schedule.setText(R.string.scheduleExample);
         }
     }
 
