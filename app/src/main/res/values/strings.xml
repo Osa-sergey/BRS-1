@@ -73,6 +73,7 @@
     <string name="news_toolbar">NEWS</string>
     <string name="contacts_toolbar">CONTACTS</string>
     <string name="settings_toolbar">SETTINGS</string>
+    <string name="bug_report">BUG REPORT</string>
     <string name="message">Confirm delete?</string>
     <string name="accept">Yes</string>
     <string name="reject">No</string>

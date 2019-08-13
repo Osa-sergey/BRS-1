@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.misis.brs.Database.DBHelper;
+import com.misis.brs.Fragments.BugReportFragment;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometaskFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     private NewsFragment newsFragment;
     private SettingsFragment settingsFragment;
     private WhatsNewFragment whatsNewFragment;
+    private BugReportFragment bugReportFragment;
 
     private ImageButton ibDropdown;
     private TextView studName;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity
         newsFragment = new NewsFragment();
         settingsFragment = new SettingsFragment();
         whatsNewFragment = new WhatsNewFragment();
+        bugReportFragment = new BugReportFragment();
 
         //нижнее меню
         llFirstLabel = findViewById(R.id.llMenuFirstLabel);
@@ -211,7 +214,7 @@ public class MainActivity extends AppCompatActivity
                     replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
                 case R.id.BugReport:
-
+                    replaceFragment(R.id.themaincontainer,bugReportFragment);
                     break;
                 case R.id.Help:
                     replaceFragment(R.id.themaincontainer,whatsNewFragment);
