@@ -71,7 +71,7 @@
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
 
     <string name="news_toolbar">НОВОСТИ</string>
-    <string name="contacts_toolbar">КОНТАКРЫ</string>
+    <string name="contacts_toolbar">КОНТАКТЫ</string>
     <string name="settings_toolbar">НАСТРОЙКИ</string>
     <string name="bug_report">ОТЧЁТ ОБ ОШИБКЕ</string>
     <string name="message">Подтвердить удаление?</string>
