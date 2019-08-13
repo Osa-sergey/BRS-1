@@ -98,7 +98,7 @@ public class MarkFragment extends Fragment {
 
         //изменение spinner
         ArrayAdapter<?> adapter =
-                ArrayAdapter.createFromResource(getActivity(), markTypes, android.R.layout.simple_spinner_item);
+                ArrayAdapter.createFromResource(getActivity(), markTypes, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.view_mark_type_simple_dropdown_item);
 
         markTypeSpinner.setAdapter(adapter);

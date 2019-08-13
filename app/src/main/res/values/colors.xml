@@ -12,6 +12,7 @@
     <color name="colorTopBarBackground">#00ADEE</color>
 
     <color name="colorToolBarText">#FFF</color>
+    <color name="colorSpinner">#FFF</color>
     <color name="colorPopupSpinnerBackground">#AAE1FA</color>
     <color name="colorPopupSpinnerText">#FFF</color>
     <color name="colorExtraInfoBackground">#EEEEEE</color>
