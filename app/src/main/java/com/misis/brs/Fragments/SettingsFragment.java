@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,6 +30,9 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
     private EditText day1;
     private EditText day2;
     private EditText day3;
+    private Spinner day1Pick;
+    private Spinner day2Pick;
+    private Spinner day3Pick;
 
     @Nullable
     @Override
@@ -47,6 +51,9 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
         day1 = (EditText) view.findViewById(R.id.day1Edit);
         day2 = (EditText) view.findViewById(R.id.day2Edit);
         day3 = (EditText) view.findViewById(R.id.day3Edit);
+        day1Pick = (Spinner) view.findViewById(R.id.day1Spin);
+        day2Pick = (Spinner) view.findViewById(R.id.day2Spin);
+        day3Pick = (Spinner) view.findViewById(R.id.day3Spin);
 
         //применяем обработчик
         studName.setOnKeyListener(this);
@@ -79,6 +86,7 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
         //для сохранения данных
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         SharedPreferences.Editor editor = pref.edit();
+        String day;
         //обработка сохранения текста после нажатия enter
         if(event.getAction() == KeyEvent.ACTION_DOWN &&
                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
@@ -93,13 +101,16 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
                     editor.putString("teacherName",teacherName.getText().toString());
                     break;
                 case R.id.day1Edit:
-                    editor.putString("day1",day1.getText().toString());
+                    day = (String)day1Pick.getSelectedItem();
+                    editor.putString("day1",day + " " + day1.getText().toString());
                     break;
                 case R.id.day2Edit:
-                    editor.putString("day2",day2.getText().toString());
+                    day = (String)day2Pick.getSelectedItem();
+                    editor.putString("day2",day + " " + day2.getText().toString());
                     break;
                 case R.id.day3Edit:
-                    editor.putString("day3",day3.getText().toString());
+                    day = (String)day3Pick.getSelectedItem();
+                    editor.putString("day3",day + " " + day3.getText().toString());
                     break;
             }
             editor.apply();

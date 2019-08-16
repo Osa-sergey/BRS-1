@@ -67,6 +67,16 @@
         <item>Финальный тест</item>
     </string-array>
 
+    <string-array name="days_of_week">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресение</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Открыть боковое меню</string>
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
 
@@ -96,7 +106,7 @@
     <string name="day_3">День 3</string>
     <string name="day_2">День 2</string>
     <string name="day_1">День 1</string>
-    <string name="hintSchedule">Добавить день и аудиторию</string>
+    <string name="hintSchedule">Добавить аудиторию</string>
     <string name="hintFIO">Добавить ФИО</string>
     <string name="hintGroup">Добавить группу</string>
     <string name="teacherName">Иванов Иван Иванович</string>

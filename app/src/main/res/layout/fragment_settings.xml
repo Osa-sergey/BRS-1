@@ -7,9 +7,9 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/notif"
@@ -24,10 +24,10 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/notif_switch"
-            app:layout_constraintHorizontal_bias="0.202"
+            app:layout_constraintHorizontal_bias="0.136"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.084" />
+            app:layout_constraintVertical_bias="0.085" />
 
         <Switch
             android:id="@+id/notif_switch"
@@ -57,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/student_s_name"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
@@ -86,10 +86,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="92dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/group"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
@@ -115,10 +115,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="144dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/teacher1"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
@@ -155,10 +155,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="208dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/schedule"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
@@ -169,45 +169,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="260dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/day_1"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
             app:layout_constraintTop_toBottomOf="@+id/notif" />
 
+        <Spinner
+            android:id="@+id/day1Spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/days_of_week"
+            android:popupBackground="@color/colorPopupSpinnerBackground"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@+id/day1"
+            app:layout_constraintEnd_toStartOf="@+id/day1Edit"
+            app:layout_constraintStart_toEndOf="@+id/day1"
+            app:layout_constraintTop_toTopOf="@+id/day1" />
+
         <EditText
             android:id="@+id/day1Edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:fontFamily="Roboto"
             android:hint="@string/hintSchedule"
             android:inputType="textCapSentences|textAutoCorrect"
             android:textColor="@color/colorTextFragment"
             android:textColorHint="@color/hint"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/day1"
-            app:layout_constraintEnd_toEndOf="@+id/teacherNameEdit"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/teacherNameEdit"
-            app:layout_constraintTop_toTopOf="@+id/day1"
-            app:layout_constraintVertical_bias="0.523" />
+            app:layout_constraintBottom_toBottomOf="@+id/day1Spin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/day1Spin"
+            app:layout_constraintVertical_bias="0.388" />
 
         <TextView
             android:id="@+id/day2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="312dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/day_2"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
             app:layout_constraintTop_toBottomOf="@+id/notif" />
+
+        <Spinner
+            android:id="@+id/day2Spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/days_of_week"
+            android:popupBackground="@color/colorPopupSpinnerBackground"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@+id/day2"
+            app:layout_constraintEnd_toStartOf="@+id/day2Edit"
+            app:layout_constraintStart_toEndOf="@+id/day2"
+            app:layout_constraintTop_toTopOf="@+id/day2" />
 
         <EditText
             android:id="@+id/day2Edit"
@@ -219,11 +246,11 @@
             android:textColor="@color/colorTextFragment"
             android:textColorHint="@color/hint"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/day2"
+            app:layout_constraintBottom_toBottomOf="@+id/day2Spin"
             app:layout_constraintEnd_toEndOf="@+id/day1Edit"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/day1Edit"
-            app:layout_constraintTop_toTopOf="@+id/day2"
+            app:layout_constraintTop_toTopOf="@+id/day2Spin"
             app:layout_constraintVertical_bias="0.571" />
 
         <TextView
@@ -231,14 +258,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="364dp"
-            android:textColor="@color/colorTextFragment"
-            android:textSize="16sp"
             android:fontFamily="Roboto"
             android:text="@string/day_3"
+            android:textColor="@color/colorTextFragment"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/notif"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/notif"
             app:layout_constraintTop_toBottomOf="@+id/notif" />
+
+        <Spinner
+            android:id="@+id/day3Spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/days_of_week"
+            android:popupBackground="@color/colorPopupSpinnerBackground"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@+id/day3"
+            app:layout_constraintEnd_toStartOf="@+id/day3Edit"
+            app:layout_constraintStart_toEndOf="@+id/day3"
+            app:layout_constraintTop_toTopOf="@+id/day3" />
 
         <EditText
             android:id="@+id/day3Edit"
@@ -250,11 +291,11 @@
             android:textColor="@color/colorTextFragment"
             android:textColorHint="@color/hint"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/day3"
+            app:layout_constraintBottom_toBottomOf="@+id/day3Spin"
             app:layout_constraintEnd_toEndOf="@+id/day2Edit"
             app:layout_constraintHorizontal_bias="0.271"
             app:layout_constraintStart_toStartOf="@+id/day2Edit"
-            app:layout_constraintTop_toTopOf="@+id/day3" />
+            app:layout_constraintTop_toTopOf="@+id/day3Spin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -67,6 +67,16 @@
         <item>Final Test/IELTS</item>
     </string-array>
 
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -95,7 +105,7 @@
     <string name="day_3">Day 3</string>
     <string name="day_2">Day 2</string>
     <string name="day_1">Day 1</string>
-    <string name="hintSchedule">Add day and lecture room</string>
+    <string name="hintSchedule">Add lecture room</string>
     <string name="hintFIO">Add FIO</string>
     <string name="hintGroup">Add group</string>
     <string name="teacherName">Ivanov Ivan Ivanovich</string>
