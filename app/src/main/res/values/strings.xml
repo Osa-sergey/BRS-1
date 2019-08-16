@@ -33,16 +33,16 @@
     </string-array>
 
     <string-array name="semesters_list">
-        <item>1st semester</item>
-        <item>2nd semester</item>
-        <item>3d semester</item>
-        <item>4th semester</item>
-        <item>5th semester</item>
-        <item>6th semester</item>
-        <item>7th semester</item>
-        <item>8th semester</item>
-        <item>9th semester</item>
-        <item>10th semester</item>
+        <item>1 semester</item>
+        <item>2 semester</item>
+        <item>3 semester</item>
+        <item>4 semester</item>
+        <item>5 semester</item>
+        <item>6 semester</item>
+        <item>7 semester</item>
+        <item>8 semester</item>
+        <item>9 semester</item>
+        <item>10 semester</item>
     </string-array>
 
     <string-array name="types_of_marks_list_even">

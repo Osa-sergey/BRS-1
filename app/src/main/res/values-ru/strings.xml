@@ -33,16 +33,16 @@
     </string-array>
 
     <string-array name="semesters_list">
-        <item>1ый семестр</item>
-        <item>2ой семестр</item>
-        <item>3ий семестр</item>
-        <item>4ый семестр</item>
-        <item>5ый семестр</item>
-        <item>6ой семестр</item>
-        <item>7ой семестр</item>
-        <item>8ой семестр</item>
-        <item>9ый семестр</item>
-        <item>10ый семестр</item>
+        <item>1 семестр</item>
+        <item>2 семестр</item>
+        <item>3 семестр</item>
+        <item>4 семестр</item>
+        <item>5 семестр</item>
+        <item>6 семестр</item>
+        <item>7 семестр</item>
+        <item>8 семестр</item>
+        <item>9 семестр</item>
+        <item>10 семестр</item>
     </string-array>
 
     <string-array name="types_of_marks_list_even">
