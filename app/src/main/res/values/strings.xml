@@ -68,13 +68,13 @@
     </string-array>
 
     <string-array name="days_of_week">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
+        <item>Mon</item>
+        <item>Tues</item>
+        <item>Wed</item>
+        <item>Thurs</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
     </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -97,6 +97,7 @@
     <string name="snackbarLimitCount">Limit exceeded the number of evaluations of this type.</string>
     <string name="snackbarLimitPoints">Limit for the number of points for this type of assessment.</string>
     <string name="snackbarEmptyText">Hometask is empty</string>
+    <string name="snackbarSave">Changes saved</string>
 
     <string name="CalendarBatton">Add new task</string>
     <string name="side_menu_updates">UPDATES</string>
@@ -105,7 +106,7 @@
     <string name="day_3">Day 3</string>
     <string name="day_2">Day 2</string>
     <string name="day_1">Day 1</string>
-    <string name="hintSchedule">Add lecture room</string>
+    <string name="hintSchedule">Lecture room</string>
     <string name="hintFIO">Add FIO</string>
     <string name="hintGroup">Add group</string>
     <string name="teacherName">Ivanov Ivan Ivanovich</string>
