@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:text="@string/email"
                 android:textSize="18sp"
-                android:fontFamily="Roboto"
+                android:fontFamily="@font/robotoregular"
                 android:textColor="@color/colorTextEmail"/>
 
         </LinearLayout>
@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:text="@string/phone"
                 android:textSize="18sp"
-                android:fontFamily="Roboto"
+                android:fontFamily="@font/robotoregular"
                 android:textColor="@color/colorPhone"/>
 
         </LinearLayout>
@@ -72,7 +72,7 @@
             android:layout_marginTop="80dp"
             android:text="@string/join"
             android:textSize="20sp"
-            android:fontFamily="Roboto"
+            android:fontFamily="@font/robotoregular"
             android:textColor="@color/colorTextJoin"/>
 
         <LinearLayout
@@ -96,7 +96,7 @@
                 android:layout_weight="1"
                 android:text="@string/instagram"
                 android:textSize="18sp"
-                android:fontFamily="Roboto"
+                android:fontFamily="@font/robotoregular"
                 android:textColor="@color/colorInstagram"/>
 
         </LinearLayout>

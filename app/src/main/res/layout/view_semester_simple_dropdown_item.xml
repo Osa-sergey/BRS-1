@@ -10,6 +10,5 @@
     android:paddingTop="5dp"
     android:background="@color/colorPopupSpinnerBackground"
     android:textColor="@color/colorPopupSpinnerText"
-    android:fontFamily="Roboto"
-    android:textStyle="bold"
+    android:fontFamily="@font/robotoregular"
     android:textSize="18sp"/>
