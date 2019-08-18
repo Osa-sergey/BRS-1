@@ -1,13 +1,13 @@
 package com.misis.brs.Fragments;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,10 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 
-public class SettingsFragment extends Fragment implements View.OnKeyListener {
+public class SettingsFragment extends Fragment{
 
     private Switch notif;
     private EditText studName;
@@ -33,6 +34,7 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
     private Spinner day1Pick;
     private Spinner day2Pick;
     private Spinner day3Pick;
+    private Button save;
 
     @Nullable
     @Override
@@ -54,14 +56,7 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
         day1Pick = (Spinner) view.findViewById(R.id.day1Spin);
         day2Pick = (Spinner) view.findViewById(R.id.day2Spin);
         day3Pick = (Spinner) view.findViewById(R.id.day3Spin);
-
-        //применяем обработчик
-        studName.setOnKeyListener(this);
-        group.setOnKeyListener(this);
-        teacherName.setOnKeyListener(this);
-        day1.setOnKeyListener(this);
-        day2.setOnKeyListener(this);
-        day3.setOnKeyListener(this);
+        save = (Button) view.findViewById(R.id.saveButton);
 
         //задаём значения по умолчанию
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
@@ -72,6 +67,42 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
         day2.setText(pref.getString("day2", ""));
         day3.setText(pref.getString("day3", ""));
 
+        //добавляем обработчик сохранения
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //для сохранения данных
+                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+                SharedPreferences.Editor editor = pref.edit();
+                String day;
+                editor.putString("studName",studName.getText().toString());
+                editor.putString("group",group.getText().toString());
+                editor.putString("teacherName",teacherName.getText().toString());
+                day = (String)day1Pick.getSelectedItem();
+                editor.putString("day1",day + " " + day1.getText().toString());
+                day = (String)day2Pick.getSelectedItem();
+                editor.putString("day2",day + " " + day2.getText().toString());
+                day = (String)day3Pick.getSelectedItem();
+                editor.putString("day3",day + " " + day3.getText().toString());
+                editor.apply();
+
+                //скрываем клавиатуру
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(save.getWindowToken(), 0);
+
+                //обновляем header
+                ((MainActivity)getActivity()).setHeader();
+
+                //сообщение о сохранени
+                final Snackbar notificationSnackbar = Snackbar.make(
+                        v,
+                        R.string.snackbarSave,
+                        Snackbar.LENGTH_LONG
+                );
+                notificationSnackbar.show();
+            }
+        });
+
         notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,43 +112,13 @@ public class SettingsFragment extends Fragment implements View.OnKeyListener {
         return view;
     }
 
+    //Обрабатываем скрытие клавиатуры при выходе из фрагмента
     @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        //для сохранения данных
-        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
-        SharedPreferences.Editor editor = pref.edit();
-        String day;
-        //обработка сохранения текста после нажатия enter
-        if(event.getAction() == KeyEvent.ACTION_DOWN &&
-                (keyCode == KeyEvent.KEYCODE_ENTER)) {
-            switch (v.getId()){
-                case R.id.studNameEdit:
-                    editor.putString("studName",studName.getText().toString());
-                    break;
-                case R.id.groupEdit:
-                    editor.putString("group",group.getText().toString());
-                    break;
-                case R.id.teacherNameEdit:
-                    editor.putString("teacherName",teacherName.getText().toString());
-                    break;
-                case R.id.day1Edit:
-                    day = (String)day1Pick.getSelectedItem();
-                    editor.putString("day1",day + " " + day1.getText().toString());
-                    break;
-                case R.id.day2Edit:
-                    day = (String)day2Pick.getSelectedItem();
-                    editor.putString("day2",day + " " + day2.getText().toString());
-                    break;
-                case R.id.day3Edit:
-                    day = (String)day3Pick.getSelectedItem();
-                    editor.putString("day3",day + " " + day3.getText().toString());
-                    break;
-            }
-            editor.apply();
-            //обновляем header
-            ((MainActivity)getActivity()).setHeader();
-            return true;
-        }
-        return false;
+    public void onPause() {
+        super.onPause();
+        //скрываем клавиатуру
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
     }
 }
