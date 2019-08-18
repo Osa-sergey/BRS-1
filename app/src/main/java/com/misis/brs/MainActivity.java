@@ -225,9 +225,7 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            llFirstLabel.setVisibility(View.GONE);
-            llSecondLabel.setVisibility(View.GONE);
-            llThirdLabel.setVisibility(View.GONE);
+            emptyBottomMenu();
 
         } catch (Exception e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
