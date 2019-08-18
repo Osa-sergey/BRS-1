@@ -316,6 +316,16 @@ public class MarkFragment extends Fragment {
         return view;
     }
 
+    //Обрабатываем скрытие клавиатуры при выходе из фрагмента
+    @Override
+    public void onPause() {
+        super.onPause();
+        //скрываем клавиатуру
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+    }
+
     private void refreshMarkList() {
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         //подгружаем записи из БД
