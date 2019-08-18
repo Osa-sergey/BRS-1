@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.misis.brs.Database.DBHelper;
@@ -50,8 +51,10 @@ public class HometaskViewAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_task_simple_item,null);
 
-        CheckBox notification = ((CheckBox) view.findViewById(R.id.notification));
-        CheckBox done = ((CheckBox) view.findViewById(R.id.done));
+        CheckBox notification = (CheckBox) view.findViewById(R.id.notification);
+        final CheckBox done = (CheckBox) view.findViewById(R.id.done);
+        LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
+
         ((TextView) view.findViewById(R.id.taskText)).setText(hometasks.get(position).getDescription());
         ((TextView) view.findViewById(R.id.taskDate)).setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
         notification.setChecked(hometasks.get(position).getCheckNotify());
@@ -77,7 +80,17 @@ public class HometaskViewAdapter extends BaseAdapter {
                 DBHelper.updateHometask(task);
             }
         });
-
+        //чтобы и область вокруг чекбокса реагировала на нажатие
+        cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //изменяем значение и сохраняем в базу данных
+                task.setCheckDone(!task.getCheckDone());
+                //не забываем изменять отображение чекера
+                done.setChecked(task.getCheckDone());
+                DBHelper.updateHometask(task);
+            }
+        });
         return view;
     }
 }
