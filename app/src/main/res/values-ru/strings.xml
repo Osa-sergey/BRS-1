@@ -99,6 +99,7 @@
     <string name="snackbarLimitPoints">Привышен лимит количества баллов этого типа</string>
     <string name="snackbarEmptyText">Домашнее задание пусто</string>
     <string name="snackbarSave">Изменения сохранены</string>
+    <string name="snackbarNoOnline">Нет подключения к интернету</string>
 
     <string name="CalendarBatton">Добавить новое задание</string>
     <string name="side_menu_updates">ОБНОВЛЕНИЯ</string>

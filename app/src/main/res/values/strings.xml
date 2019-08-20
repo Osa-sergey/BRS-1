@@ -98,6 +98,7 @@
     <string name="snackbarLimitPoints">Limit for the number of points for this type of assessment.</string>
     <string name="snackbarEmptyText">Hometask is empty</string>
     <string name="snackbarSave">Changes saved</string>
+    <string name="snackbarNoOnline">No internet connection</string>
 
     <string name="CalendarBatton">Add new task</string>
     <string name="side_menu_updates">UPDATES</string>
