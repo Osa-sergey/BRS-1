@@ -3,7 +3,6 @@ package com.misis.brs;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -26,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.misis.brs.Database.DBHelper;
+import com.misis.brs.Fragments.BugReportFragment;
 import com.misis.brs.Fragments.ContactsFragment;
 import com.misis.brs.Fragments.HomeFragment;
 import com.misis.brs.Fragments.HometaskFragment;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     private NewsFragment newsFragment;
     private SettingsFragment settingsFragment;
     private WhatsNewFragment whatsNewFragment;
+    private BugReportFragment bugReportFragment;
 
     private ImageButton ibDropdown;
     private TextView studName;
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity
         newsFragment = new NewsFragment();
         settingsFragment = new SettingsFragment();
         whatsNewFragment = new WhatsNewFragment();
+        bugReportFragment = new BugReportFragment();
 
         //нижнее меню
         llFirstLabel = findViewById(R.id.llMenuFirstLabel);
@@ -153,14 +155,20 @@ public class MainActivity extends AppCompatActivity
 
     public void setHeader() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("Prefs", 0);
-        if(pref.getString("studName", "") != ""){
+        if(!pref.getString("studName", "").equals("")){
             studName.setText(pref.getString("studName", ""));
+        }else {
+            studName.setText(R.string.student_s_name);
         }
-        if(pref.getString("group", "") != ""){
+        if(!pref.getString("group", "").equals("")){
             group.setText(pref.getString("group", ""));
+        }else {
+            group.setText(R.string.group);
         }
-        if(pref.getString("teacherName", "") != ""){
+        if(!pref.getString("teacherName", "").equals("")){
             teacherName.setText(pref.getString("teacherName", ""));
+        }else {
+            teacherName.setText(R.string.teacherName);
         }
         String str = "";
         str += pref.getString("day1", "") + "\n";
@@ -168,6 +176,8 @@ public class MainActivity extends AppCompatActivity
         str += pref.getString("day3", "") + "\n";
         if(!str.equals("\n\n\n")){
             schedule.setText(str);
+        }else {
+            schedule.setText(R.string.scheduleExample);
         }
     }
 
@@ -204,7 +214,7 @@ public class MainActivity extends AppCompatActivity
                     replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
                 case R.id.BugReport:
-
+                    replaceFragment(R.id.themaincontainer,bugReportFragment);
                     break;
                 case R.id.Help:
                     replaceFragment(R.id.themaincontainer,whatsNewFragment);
@@ -215,9 +225,7 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            llFirstLabel.setVisibility(View.GONE);
-            llSecondLabel.setVisibility(View.GONE);
-            llThirdLabel.setVisibility(View.GONE);
+            emptyBottomMenu();
 
         } catch (Exception e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();

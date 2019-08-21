@@ -126,6 +126,16 @@ public class HometaskAddFragment extends Fragment {
         return view;
     }
 
+    //Обрабатываем скрытие клавиатуры при выходе из фрагмента
+    @Override
+    public void onPause() {
+        super.onPause();
+        //скрываем клавиатуру
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+    }
+
     private void startNotification(boolean isRepeating) {
         AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         Intent intent;

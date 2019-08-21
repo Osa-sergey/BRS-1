@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         semester.setVisibility(View.VISIBLE);
 
         ArrayAdapter<?> adapter =
-                ArrayAdapter.createFromResource(getActivity(), R.array.semesters_list, android.R.layout.simple_spinner_item);
+                ArrayAdapter.createFromResource(getActivity(), R.array.semesters_list, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.view_semester_simple_dropdown_item);
         semester.setAdapter(adapter);
 

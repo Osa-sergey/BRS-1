@@ -98,7 +98,7 @@ public class MarkFragment extends Fragment {
 
         //изменение spinner
         ArrayAdapter<?> adapter =
-                ArrayAdapter.createFromResource(getActivity(), markTypes, android.R.layout.simple_spinner_item);
+                ArrayAdapter.createFromResource(getActivity(), markTypes, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.view_mark_type_simple_dropdown_item);
 
         markTypeSpinner.setAdapter(adapter);
@@ -314,6 +314,16 @@ public class MarkFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    //Обрабатываем скрытие клавиатуры при выходе из фрагмента
+    @Override
+    public void onPause() {
+        super.onPause();
+        //скрываем клавиатуру
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
     }
 
     private void refreshMarkList() {

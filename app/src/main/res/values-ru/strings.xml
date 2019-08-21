@@ -33,16 +33,16 @@
     </string-array>
 
     <string-array name="semesters_list">
-        <item>1ый семестр</item>
-        <item>2ой семестр</item>
-        <item>3ий семестр</item>
-        <item>4ый семестр</item>
-        <item>5ый семестр</item>
-        <item>6ой семестр</item>
-        <item>7ой семестр</item>
-        <item>8ой семестр</item>
-        <item>9ый семестр</item>
-        <item>10ый семестр</item>
+        <item>1 семестр</item>
+        <item>2 семестр</item>
+        <item>3 семестр</item>
+        <item>4 семестр</item>
+        <item>5 семестр</item>
+        <item>6 семестр</item>
+        <item>7 семестр</item>
+        <item>8 семестр</item>
+        <item>9 семестр</item>
+        <item>10 семестр</item>
     </string-array>
 
     <string-array name="types_of_marks_list_even">
@@ -67,12 +67,23 @@
         <item>Финальный тест</item>
     </string-array>
 
+    <string-array name="days_of_week">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Открыть боковое меню</string>
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
 
     <string name="news_toolbar">НОВОСТИ</string>
-    <string name="contacts_toolbar">КОНТАКРЫ</string>
+    <string name="contacts_toolbar">КОНТАКТЫ</string>
     <string name="settings_toolbar">НАСТРОЙКИ</string>
+    <string name="bug_report">ОТЧЁТ ОБ ОШИБКЕ</string>
     <string name="message">Подтвердить удаление?</string>
     <string name="accept">Да</string>
     <string name="reject">Нет</string>
@@ -87,6 +98,8 @@
     <string name="snackbarLimitCount">Привышен лимит количества оценок этого типа</string>
     <string name="snackbarLimitPoints">Привышен лимит количества баллов этого типа</string>
     <string name="snackbarEmptyText">Домашнее задание пусто</string>
+    <string name="snackbarSave">Изменения сохранены</string>
+    <string name="snackbarNoOnline">Нет подключения к интернету</string>
 
     <string name="CalendarBatton">Добавить новое задание</string>
     <string name="side_menu_updates">ОБНОВЛЕНИЯ</string>
@@ -95,7 +108,7 @@
     <string name="day_3">День 3</string>
     <string name="day_2">День 2</string>
     <string name="day_1">День 1</string>
-    <string name="hintSchedule">Добавить день и аудиторию</string>
+    <string name="hintSchedule">Аудитория</string>
     <string name="hintFIO">Добавить ФИО</string>
     <string name="hintGroup">Добавить группу</string>
     <string name="teacherName">Иванов Иван Иванович</string>
