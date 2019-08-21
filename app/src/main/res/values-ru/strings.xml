@@ -7,8 +7,8 @@
     <string name="side_menu_settings">Настройки</string>
     <string name="student_s_name">Имя студента</string>
     <string name="group">Группа</string>
-    <string name="teacher">Учитель:</string>
-    <string name="teacher1">Учитель</string>
+    <string name="teacher">Преподаватель:</string>
+    <string name="teacher1">Преподаватель</string>
     <string name="schedule">Расписание:</string>
     <string name="read_more">Целиком</string>
     <string name="email">english@misis.ru</string>

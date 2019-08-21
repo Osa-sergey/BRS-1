@@ -100,10 +100,10 @@ public class HomeFragment extends Fragment {
         String lang = Locale.getDefault().getDisplayLanguage();
         switch (lang){
             case "English":
-                score.setText("TOTAL SCORE\n" + sum + "/100");
+                score.setText("YOUR SCORE\n" + sum + "/100");
                 break;
             case "русский":
-                score.setText("СУММА БАЛЛОВ\n" + sum + "/100");
+                score.setText("ВАШИ БАЛЛЫ\n" + sum + "/100");
                 break;
         }
 
