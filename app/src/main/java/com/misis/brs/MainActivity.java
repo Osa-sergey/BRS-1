@@ -207,9 +207,9 @@ public class MainActivity extends AppCompatActivity
 
         try {
             switch (id) {
-                case R.id.News:
-                    replaceFragment(R.id.themaincontainer,newsFragment);
-                    break;
+//                case R.id.News:
+//                    replaceFragment(R.id.themaincontainer,newsFragment);
+//                    break;
                 case R.id.Contacts:
                     replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
