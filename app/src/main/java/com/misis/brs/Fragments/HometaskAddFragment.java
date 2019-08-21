@@ -1,17 +1,10 @@
 package com.misis.brs.Fragments;
 
-import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +17,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.misis.brs.AlarmNotificationReceiver;
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Hometask;
 import com.misis.brs.MainActivity;
 import com.misis.brs.R;
 import com.misis.brs.TimeHelper;
 
-import java.util.Locale;
 
 public class HometaskAddFragment extends Fragment {
 
@@ -78,45 +69,15 @@ public class HometaskAddFragment extends Fragment {
                 } else {
                     //создаём запись
                     addingHometask = new Hometask(deadline);
-                    addingHometask.setCheckNotify(true);
+                    addingHometask.setCheckNotify(false);
                     addingHometask.setCheckDone(false);
                     addingHometask.setDescription(text.getText().toString());
 
                     SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
                     addingHometask.setSemester(pref.getInt("semester", 0));
-                    // минус 12 часов ставим в 15:00 с учётом сдвига на +3 ( GMT+03:00)
-                    long notifyTime = addingHometask.getDeadline() - 43200;
-                    //отключаем нотификацию, если ее время прошло
-                    if (notifyTime < TimeHelper.currentTime() / 1000) {
-                        addingHometask.setCheckNotify(false);
-                    }
 
-                    addingHometask.setTimeNotification(notifyTime);
                     DBHelper.insertHometask(addingHometask);
 
-                    startNotification(false);
-
-
-                    //выписываем время нотификации
-                    //добавляем поддержку языков
-                    String lang = Locale.getDefault().getDisplayLanguage();
-                    String notify = "";
-                    if (addingHometask.getCheckNotify()) {
-                        switch (lang) {
-                            case "English":
-                                notify = "You will get the notification on " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
-                                break;
-                            case "русский":
-                                notify = "Уведомление будет в " + TimeHelper.getNotifTime(addingHometask.getTimeNotification());
-                                break;
-                        }
-                        final Snackbar notificationSnackbar = Snackbar.make(
-                                v,
-                                notify,
-                                Snackbar.LENGTH_LONG
-                        );
-                        notificationSnackbar.show();
-                    }
                     //откатываемся в начало
                     fm.popBackStack();
                     fm.popBackStack();
@@ -133,25 +94,6 @@ public class HometaskAddFragment extends Fragment {
         //скрываем клавиатуру
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-
-    }
-
-    private void startNotification(boolean isRepeating) {
-        AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent;
-        PendingIntent pendingIntent;
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            intent = new Intent(getContext(), AlarmNotificationReceiver.class);
-            pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-            if (!isRepeating)
-                manager.set(AlarmManager.RTC_WAKEUP, addingHometask.getTimeNotification()*1000, pendingIntent);
-            else
-                manager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 86400000, pendingIntent); // 86400000 - Интервал повора 24 часа
-
-
-        }
 
     }
 }

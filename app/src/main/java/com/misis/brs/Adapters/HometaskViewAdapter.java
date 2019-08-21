@@ -51,26 +51,14 @@ public class HometaskViewAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_task_simple_item,null);
 
-        CheckBox notification = (CheckBox) view.findViewById(R.id.notification);
         final CheckBox done = (CheckBox) view.findViewById(R.id.done);
         LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
 
         ((TextView) view.findViewById(R.id.taskText)).setText(hometasks.get(position).getDescription());
         ((TextView) view.findViewById(R.id.taskDate)).setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
-        notification.setChecked(hometasks.get(position).getCheckNotify());
         done.setChecked(hometasks.get(position).getCheckDone());
 
         final Hometask task = hometasks.get(position);
-
-        //обработка нажатия на checkBox
-        notification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO добавить отмену уведомления
-                task.setCheckNotify(isChecked);
-                DBHelper.updateHometask(task);
-            }
-        });
 
         done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

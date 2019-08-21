@@ -43,22 +43,6 @@
             card_view:layout_constraintStart_toStartOf="@+id/taskText"
             card_view:layout_constraintTop_toBottomOf="@+id/taskText" />
 
-
-        <!--android:focusable="false"
-            android:focusableInTouchMode="false"
-            нужны для того, чтобы работало нажатие на элемент-->
-        <CheckBox
-            android:id="@+id/notification"
-            android:layout_width="28dp"
-            android:layout_height="66dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
-            android:button="@drawable/selector_notification"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toStartOf="@+id/linearLayout" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="66dp"
