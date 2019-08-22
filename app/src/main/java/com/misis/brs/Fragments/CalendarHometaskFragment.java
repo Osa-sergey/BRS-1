@@ -30,6 +30,15 @@ public class CalendarHometaskFragment extends Fragment {
     private int curYear;
     private int curMonth;
     private  int curDay;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //переставим день на текущий и перерисуем отображение кнопки
+        calendar.setDate(TimeHelper.currentTime());
+        configur(calendar.getDate());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -49,9 +58,6 @@ public class CalendarHometaskFragment extends Fragment {
         card = (CardView) view.findViewById(R.id.hometask);
 
         //базовая настройка
-        card.setVisibility(View.GONE);
-        add.setVisibility(View.GONE);
-
         calendar.setDate(TimeHelper.currentTime());
         configur(calendar.getDate());
 
@@ -84,7 +90,7 @@ public class CalendarHometaskFragment extends Fragment {
 
     /**
      * Функция для изменения внешнего вида фрагмента в зависимости от наличия дз
-     * curData в милиск
+     * curData в милисек
      */
     private void configur(long curDate){
         text.setText(TimeHelper.getTime(curDate/1000));
