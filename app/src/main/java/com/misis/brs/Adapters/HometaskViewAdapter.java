@@ -1,6 +1,8 @@
 package com.misis.brs.Adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
 
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Hometask;
@@ -51,8 +55,18 @@ public class HometaskViewAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_task_simple_item,null);
 
+        Resources res = context.getResources();
+        Drawable border;
+
         final CheckBox done = (CheckBox) view.findViewById(R.id.done);
-        LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
+        final LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
+        final CardView card = (CardView) view.findViewById(R.id.card);
+
+        //выставляем цевет обводки
+        border = hometasks.get(position).getCheckDone() ?
+                res.getDrawable(R.drawable.card_background_on):
+                res.getDrawable(R.drawable.card_background_off);
+        card.setBackground(border);
 
         ((TextView) view.findViewById(R.id.taskText)).setText(hometasks.get(position).getDescription());
         ((TextView) view.findViewById(R.id.taskDate)).setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
@@ -66,6 +80,15 @@ public class HometaskViewAdapter extends BaseAdapter {
                 //изменяем значение и сохраняем в базу данных
                 task.setCheckDone(isChecked);
                 DBHelper.updateHometask(task);
+
+                Resources res = context.getResources();
+                Drawable border;
+
+                //перекрашиваем цвет обводки
+                border = isChecked ?
+                     res.getDrawable(R.drawable.card_background_on):
+                     res.getDrawable(R.drawable.card_background_off);
+                card.setBackground(border);
             }
         });
         //чтобы и область вокруг чекбокса реагировала на нажатие
@@ -75,8 +98,8 @@ public class HometaskViewAdapter extends BaseAdapter {
                 //изменяем значение и сохраняем в базу данных
                 task.setCheckDone(!task.getCheckDone());
                 //не забываем изменять отображение чекера
+                //так как тут вызывается метод onCheckedChanged, то обновлять запись в бд не нужно
                 done.setChecked(task.getCheckDone());
-                DBHelper.updateHometask(task);
             }
         });
         return view;
