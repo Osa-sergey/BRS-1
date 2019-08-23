@@ -163,6 +163,23 @@ public class DBHelper {
         }return null;
     }
 
+    public static Hometask[] selectUpcoming(final Long curTime){
+        AsyncTask<Long, Void, Hometask[]> task = new AsyncTask<Long, Void, Hometask[]>() {
+            @Override
+            protected Hometask[] doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectUpcoming(curTime);
+            }
+        };
+        task.execute(curTime);
+        try{
+            return task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        }return null;
+    }
+
     public static Hometask[] selectHometaskForSemester(final int semester){
         AsyncTask<Integer, Void, Hometask[]> task = new AsyncTask<Integer, Void, Hometask[]>() {
             @Override

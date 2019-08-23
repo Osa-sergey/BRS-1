@@ -29,6 +29,7 @@ public interface HometaskDao {
     @Update
     int update(Hometask hometask);
 
+    //задел на будущее
     /**
         возвращает уже завершившиеся задания функция для фильтра заданий
         @param deadline время для которого мы хотим вернуть все прошедшие записи
@@ -36,6 +37,14 @@ public interface HometaskDao {
      */
     @Query("SELECT * FROM hometask WHERE deadline < :deadline")
     Hometask[] selectOverdue(long deadline);
+
+    /**
+     * возвращает предстоящие несделанные задания
+     * @param curTime время в секундах относительно которого счмтаем
+     * @return список домашних заданий
+     */
+    @Query("SELECT * FROM hometask WHERE deadline > :curTime AND checkDone == 0")
+    Hometask[] selectUpcoming(long curTime);
 
     @Query("SELECT * FROM hometask WHERE semester = :semester")
     Hometask[] selectForSemester(int semester);
