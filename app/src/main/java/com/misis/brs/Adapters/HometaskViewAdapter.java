@@ -10,6 +10,8 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.Hometask;
 import com.misis.brs.R;
@@ -52,11 +54,25 @@ public class HometaskViewAdapter extends BaseAdapter {
         View view = inflater.inflate(R.layout.view_task_simple_item,null);
 
         final CheckBox done = (CheckBox) view.findViewById(R.id.done);
-        LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
+        final CardView card = (CardView) view.findViewById(R.id.taskCard);
+        final LinearLayout cover = (LinearLayout) view.findViewById(R.id.linearLayout);
+        final TextView taskText = (TextView) view.findViewById(R.id.taskText);
+        final TextView taskDate = (TextView) view.findViewById(R.id.taskDate);
 
-        ((TextView) view.findViewById(R.id.taskText)).setText(hometasks.get(position).getDescription());
-        ((TextView) view.findViewById(R.id.taskDate)).setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
+        taskText.setText(hometasks.get(position).getDescription());
+        taskDate.setText(TimeHelper.getTime(hometasks.get(position).getDeadline()));
         done.setChecked(hometasks.get(position).getCheckDone());
+
+        //настройка цветов в зависимости от чекбокса
+        if(hometasks.get(position).getCheckDone()){
+            card.setBackgroundColor(context.getResources().getColor(R.color.colorTaskItemBackgroundCheck));
+            taskText.setTextColor(context.getResources().getColor(R.color.colorTextTaskCheck));
+            taskDate.setTextColor(context.getResources().getColor(R.color.colorTextTaskCheck));
+        }else{
+            card.setBackgroundColor(context.getResources().getColor(R.color.colorTaskItemBackgroundNoCheck));
+            taskText.setTextColor(context.getResources().getColor(R.color.colorTextTaskNoCheck));
+            taskDate.setTextColor(context.getResources().getColor(R.color.colorTextTaskNoCheck));
+        }
 
         final Hometask task = hometasks.get(position);
 
@@ -65,6 +81,16 @@ public class HometaskViewAdapter extends BaseAdapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //изменяем значение и сохраняем в базу данных
                 task.setCheckDone(isChecked);
+                //настройка цветов в зависимости от чекбокса
+                if(isChecked){
+                    card.setBackgroundColor(context.getResources().getColor(R.color.colorTaskItemBackgroundCheck));
+                    taskText.setTextColor(context.getResources().getColor(R.color.colorTextTaskCheck));
+                    taskDate.setTextColor(context.getResources().getColor(R.color.colorTextTaskCheck));
+                }else{
+                    card.setBackgroundColor(context.getResources().getColor(R.color.colorTaskItemBackgroundNoCheck));
+                    taskText.setTextColor(context.getResources().getColor(R.color.colorTextTaskNoCheck));
+                    taskDate.setTextColor(context.getResources().getColor(R.color.colorTextTaskNoCheck));
+                }
                 DBHelper.updateHometask(task);
             }
         });
@@ -75,8 +101,8 @@ public class HometaskViewAdapter extends BaseAdapter {
                 //изменяем значение и сохраняем в базу данных
                 task.setCheckDone(!task.getCheckDone());
                 //не забываем изменять отображение чекера
+                //так как тут вызывается метод onCheckedChanged, то обновлять запись в бд не нужно
                 done.setChecked(task.getCheckDone());
-                DBHelper.updateHometask(task);
             }
         });
         return view;

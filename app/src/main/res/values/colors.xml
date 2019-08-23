@@ -32,9 +32,13 @@
     <color name="colorTextJoin">#0175BB</color>
     <color name="colorInstagram">#545454</color>
 
-    <color name="colorTaskItemBackground">#41C8F4</color>
-    <color name="colorTextTask">#FFF</color>
+    <color name="colorTaskItemBackgroundNoCheck">#41C8F4</color>
+    <color name="colorTaskItemBackgroundCheck">#aee8fa</color>
+    <color name="colorTextTaskNoCheck">#FFF</color>
+    <color name="colorTextTaskCheck">#0175BB</color>
     <color name="colorDoneCheckBoxBackground">#0175BB</color>
+    <color name="colorDone">#28E23B</color>
+
     <color name="colorButtonAddTaskBackground">#63BE61</color>
 
     <color name="colorButtonAddPointsBackground">#D75332</color>
