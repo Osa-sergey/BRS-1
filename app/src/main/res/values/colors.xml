@@ -65,9 +65,9 @@
     <color name="circleBackground">#0175BB</color>
     <color name="ColorMark">#FFF</color>
 
-    <color name="curNoteBackground">#AAE1FA</color>
-    <color name="curNoteBorder">#88D8F2</color>
-    <color name="colorCurNoteText">#0175BB</color>
+    <color name="NoteBackground">#AAE1FA</color>
+    <color name="NoteBorder">#88D8F2</color>
+    <color name="colorNoteText">#0175BB</color>
 
     <color name="hint">#979292</color>
 </resources>
