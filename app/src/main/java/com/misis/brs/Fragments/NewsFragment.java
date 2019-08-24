@@ -1,11 +1,15 @@
 package com.misis.brs.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.misis.brs.Adapters.NewsViewAdapter;
 import com.misis.brs.Database.DBHelper;
 import com.misis.brs.Database.News;
@@ -31,19 +36,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.concurrent.ExecutionException;
 
 public class NewsFragment extends Fragment {
 
     private NewsViewAdapter newsViewAdapter;
     private ListView listView;
     private Vector<News> news;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //обновляем новости
-        getNews();
-    }
+    public int count = -1;
 
     @Nullable
     @Override
@@ -53,14 +53,20 @@ public class NewsFragment extends Fragment {
        //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.news_toolbar);
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.INVISIBLE);
-        long curDate = TimeHelper.currentTime()/1000;
-        //удаляем новости со времени публикации которых прошло больше недели
-        DBHelper.deleteNewsByDateNews(curDate-604800);
+        //получаем новости
+        news = new Vector<>();
 
-        News[] bdNews = DBHelper.selectAllNews();
-        Vector<News> news = new Vector<>();
-        if (bdNews != null) {
-            news = new Vector<>(Arrays.asList(bdNews));
+        if (isOnline(getActivity())){
+           getNews(-1);
+           for(int cur = 0; cur < count; cur++){
+               news.add(getNews(Integer.valueOf(cur)));
+           }
+        }else{
+            final Snackbar notificationSnackbar = Snackbar.make(
+                    getActivity().findViewById(R.id.themaincontainer),
+                    R.string.snackbarNoOnline,
+                    Snackbar.LENGTH_LONG
+            );
         }
         newsViewAdapter = new NewsViewAdapter(getActivity(),news);
         listView =(ListView) view.findViewById(R.id.news_list);
@@ -79,34 +85,19 @@ public class NewsFragment extends Fragment {
                 ((MainActivity) getActivity()).replaceFragment(R.id.themaincontainer,newsViewFragment);
             }
         });
-        //получаем новости
-        getNews();
         return view;
     }
 
-    private void getNews() {
-        long curDate = TimeHelper.currentTime()/1000;
-
-        //удаляем новости со времени публикации которых прошло больше недели
-        DBHelper.deleteNewsByDateNews(curDate-604800);
-
-        News[] bdNews = DBHelper.selectAllNews();
-        Vector<News> news = new Vector<>();
-        if (bdNews != null) {
-            news = new Vector<>(Arrays.asList(bdNews));
-        }
-        //Загружаем сохранённые новости
-        NewsViewAdapter.setNews(news);
-        newsViewAdapter.notifyDataSetChanged();
+    private News getNews(Integer integer) {
         //Скачиваем новости
         @SuppressLint("StaticFieldLeak")
-        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+        AsyncTask<Integer,Void,News> task = new AsyncTask<Integer, Void, News>() {
             @Override
-            protected Void doInBackground(Void... voids) {
-                Vector<News> news = new Vector<>();
+            protected News doInBackground(Integer... integers) {
+                News newsItem = new News();
+                int tmp = 0;
                 try {
-                    //TODO добавить адресс
-                    URL url = new URL("");
+                    URL url = new URL("http://iyakt.team/category/alerts/rss");
                     XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                     //убираем namespace xml
                     factory.setNamespaceAware(false);
@@ -117,41 +108,54 @@ public class NewsFragment extends Fragment {
                     boolean insideItem = false;
                     //тип эвента при чтении
                     int eventType = xpp.getEventType();
+
+                   newsItem = new News();
                     while(eventType != XmlPullParser.END_DOCUMENT){
-                        News newsItem = new News();
                         if(eventType == XmlPullParser.START_TAG){
                             if(xpp.getName().equalsIgnoreCase("item")){
                                 insideItem = true;
-                            //TODO сменить теги
                             }else if(xpp.getName().equalsIgnoreCase("title") && insideItem){
                                 newsItem.setHeader(xpp.nextText());
-                            }else if(xpp.getName().equalsIgnoreCase("text") && insideItem){
+                            }else if(xpp.getName().equalsIgnoreCase("description") && insideItem) {
                                 newsItem.setDescription(xpp.nextText());
-                            }else if(xpp.getName().equalsIgnoreCase("time") && insideItem){
-                                newsItem.setDateNews(Long.getLong(xpp.nextText()));
                             }
                             //выходим из элемента
                         }else if(eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")){
                             insideItem = false;
+                            newsItem.setDateNews(System.currentTimeMillis()/1000);
+
+                            if(count != -1 && integers[0] == tmp ){
+                                Log.d("item",newsItem.getHeader()+newsItem.getDescription());
+                                return newsItem;
+                            }
+                            tmp++;
+
                         }
                         //переходим на следующий эвент
                         eventType = xpp.next();
-                        news.add(newsItem);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 }
-                //обновляем данные
-                NewsViewAdapter.setNews(news);
-                newsViewAdapter.notifyDataSetChanged();
-                return null;
+                if(count == -1){
+                    count = tmp;
+                    return null;
+                }else
+                    return newsItem;
             }
         };
         //выполняем таск
-        task.execute();
-
+        task.execute(integer);
+        try {
+            return task.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private InputStream getInputStream(URL url){
@@ -161,5 +165,17 @@ public class NewsFragment extends Fragment {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean isOnline(Context context)
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting())
+        {
+            return true;
+        }
+        return false;
     }
 }
