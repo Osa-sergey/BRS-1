@@ -121,11 +121,27 @@
     <string name="mark_5"><![CDATA[Mark 5 - >84 points]]></string>
 
     <string-array name="update_news">
-        <item>first version complete</item>
+        <item>"Added functionality:
+		Points:
+			Record points for each semester separately (on the main screen you need to select the current semester)
+			Select the type of points and check the correctness of the input
+			Delete by long press on the points
+			Calculation of points and conversion to evaluation
+            You can see the translation criterion by clicking on the light
+		Home tasks:
+			Adding home task with a date selection (you can add only one task for one day)
+			Edit and view your home task with a short press
+			Ability to mark a task as completed
+			Deletion by long press
+			Displays upcoming tasks unchecked when creating a new record
+		Sidebar:
+			The tab with the contacts of the faculty
+			Feedback tab (We welcome Your suggestions for new functionality and error messages or incorrect behavior of the application)
+			The settings tab allows you to enter useful information that is displayed in the header of the side menu"	</item>
     </string-array>
 
     <string-array name="versions">
-        <item>1.0.0</item>
+        <item>0.1.0</item>
     </string-array>
 
     <string-array name="date">
