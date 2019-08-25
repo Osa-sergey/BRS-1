@@ -115,11 +115,11 @@
     <string name="scheduleExample">Понедельник 1024 \nВторник 1020A \nПятница 1024</string>
     <string name="yourMark">Ваша оценка</string>
 
-    <string name="mark_0"><![CDATA[Оценка 0 <- 0 баллов]]></string>
-    <string name="mark_2"><![CDATA[Оценка 2 <– 1 – 64 балла]]></string>
-    <string name="mark_3"><![CDATA[Оценка 3 <– 65 – 74 балла]]></string>
-    <string name="mark_4"><![CDATA[Оценка 4 <– 75 – 84 балла]]></string>
-    <string name="mark_5"><![CDATA[Оценка 5 <- > 84 балла]]></string>
+    <string name="mark_0"><![CDATA[Оценка 0 - 0 баллов]]></string>
+    <string name="mark_2"><![CDATA[Оценка 2 – 1–50 балла]]></string>
+    <string name="mark_3"><![CDATA[Оценка 3 – 51–69 балла]]></string>
+    <string name="mark_4"><![CDATA[Оценка 4 – 70–84 балла]]></string>
+    <string name="mark_5"><![CDATA[Оценка 5 - >84 балла]]></string>
 
     <string-array name="update_news">
         <item>первая версия завершена</item>

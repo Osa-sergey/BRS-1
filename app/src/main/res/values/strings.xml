@@ -114,11 +114,11 @@
     <string name="scheduleExample">Monday 1024 \nTuesday 1020A \nFriday 1024</string>
     <string name="yourMark">Your mark</string>
 
-    <string name="mark_0"><![CDATA[Mark 0 <- 0 points]]></string>
-    <string name="mark_2"><![CDATA[Mark 2 <– 1 – 64 points]]></string>
-    <string name="mark_3"><![CDATA[Mark 3 <– 65 – 74 points]]></string>
-    <string name="mark_4"><![CDATA[Mark 4 <– 75 – 84 points]]></string>
-    <string name="mark_5"><![CDATA[Mark 5 <- > 84 points]]></string>
+    <string name="mark_0"><![CDATA[Mark 0 – 0 points]]></string>
+    <string name="mark_2"><![CDATA[Mark 2 – 1–50 points]]></string>
+    <string name="mark_3"><![CDATA[Mark 3 – 51–69 points]]></string>
+    <string name="mark_4"><![CDATA[Mark 4 – 70–84 points]]></string>
+    <string name="mark_5"><![CDATA[Mark 5 - >84 points]]></string>
 
     <string-array name="update_news">
         <item>first version complete</item>

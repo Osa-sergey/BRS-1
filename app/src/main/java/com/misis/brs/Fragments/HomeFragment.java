@@ -159,12 +159,11 @@ public class HomeFragment extends Fragment {
                 sum+=marks[i].getMark();
             }
         }
-        //TODO поменять цифры, как прийдут + в string
         if(sum == 0) return "0";
-        if(sum > 0 && sum < 65) return "2";
-        if(sum >= 65 && sum < 75) return "3";
-        if(sum >= 75 && sum < 85) return "4";
-        if(sum >=85) return "5";
+        if(sum >  0  && sum <= 50) return "2";
+        if(sum >= 51 && sum <= 69) return "3";
+        if(sum >= 70 && sum <= 84) return "4";
+        if(sum >= 85) return "5";
         return "0";
     }
 }
