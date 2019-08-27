@@ -7,8 +7,8 @@
     <string name="side_menu_settings">Настройки</string>
     <string name="student_s_name">Имя студента</string>
     <string name="group">Группа</string>
-    <string name="teacher">Учитель:</string>
-    <string name="teacher1">Учитель</string>
+    <string name="teacher">Преподаватель:</string>
+    <string name="teacher1">Преподаватель</string>
     <string name="schedule">Расписание:</string>
     <string name="read_more">Целиком</string>
     <string name="email">english@misis.ru</string>
@@ -113,13 +113,36 @@
     <string name="hintGroup">Добавить группу</string>
     <string name="teacherName">Иванов Иван Иванович</string>
     <string name="scheduleExample">Понедельник 1024 \nВторник 1020A \nПятница 1024</string>
+    <string name="yourMark">Ваша оценка</string>
+
+    <string name="mark_0"><![CDATA[Оценка 0 - 0 баллов]]></string>
+    <string name="mark_2"><![CDATA[Оценка 2 – 1–50 балла]]></string>
+    <string name="mark_3"><![CDATA[Оценка 3 – 51–69 балла]]></string>
+    <string name="mark_4"><![CDATA[Оценка 4 – 70–84 балла]]></string>
+    <string name="mark_5"><![CDATA[Оценка 5 - >84 балла]]></string>
 
     <string-array name="update_news">
-        <item>первая версия завершена</item>
+        <item>"Добавленный функционал:
+		Баллы:
+			Записи баллов для каждого семестра отдельно (на главном экране нужно выбрать интересующий семестр)
+			Выбор типа баллов и проверка корректности ввода
+			Удаление по долгому нажатию на оценку
+			Подсчёт суммы баллов и конвертация в оценку
+            Можно посмотреть критерий перевода по нажатию на лампочку
+		Домашние задания:
+			Добавление домашних заданий с выбором даты выполнения (на один день можно добавить только одно задание)
+			Редактирование и просмотр домашнего задания по короткому нажатию
+			Возможность отметить задание как выполненное
+			Удаление по долгому нажатию
+			Отображение предстаящих неотмеченных заданий при создании новой записи
+		Боковое меню:
+			Вкладка с контактами кафедры
+			Вкладка обратной связи (Мы будем рады Вашим предложениям по новой функциональности и сообщениям об ошибках или некорректной работе приложения)
+			Вкладка настроек позволяет вносить полезную информацию, которая отображается в шапке бокового меню"	</item>
     </string-array>
 
     <string-array name="versions">
-        <item>1.0.0</item>
+        <item>0.1.0</item>
     </string-array>
 
     <string-array name="date">

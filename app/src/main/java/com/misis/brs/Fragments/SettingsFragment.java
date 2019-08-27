@@ -24,7 +24,6 @@ import com.misis.brs.R;
 
 public class SettingsFragment extends Fragment{
 
-    private Switch notif;
     private EditText studName;
     private EditText group;
     private EditText teacherName;
@@ -44,8 +43,6 @@ public class SettingsFragment extends Fragment{
         //изменение toolbar
         ((TextView)getActivity().findViewById(R.id.toolbarText)).setText(R.string.settings_toolbar);
         ((Spinner)getActivity().findViewById(R.id.semester_picker)).setVisibility(View.GONE);
-
-        notif = (Switch) view.findViewById(R.id.notif_switch);
 
         studName = (EditText) view.findViewById(R.id.studNameEdit);
         group = (EditText) view.findViewById(R.id.groupEdit);
@@ -103,12 +100,6 @@ public class SettingsFragment extends Fragment{
             }
         });
 
-        notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //TODO реализовать переключение
-            }
-        });
         return view;
     }
 

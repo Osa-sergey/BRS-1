@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         drawer = findViewById(R.id.drawer_layout);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_forward);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -207,9 +207,9 @@ public class MainActivity extends AppCompatActivity
 
         try {
             switch (id) {
-                case R.id.News:
-                    replaceFragment(R.id.themaincontainer,newsFragment);
-                    break;
+//                case R.id.News:
+//                    replaceFragment(R.id.themaincontainer,newsFragment);
+//                    break;
                 case R.id.Contacts:
                     replaceFragment(R.id.themaincontainer,contactsFragment);
                     break;
@@ -233,18 +233,6 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawers();
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // THIS IS YOUR DRAWER/HAMBURGER BUTTON
-            case android.R.id.home:
-                drawer.openDrawer(GravityCompat.START);
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void replaceFragment(int res, Fragment fragment){

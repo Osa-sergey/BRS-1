@@ -32,9 +32,13 @@
     <color name="colorTextJoin">#0175BB</color>
     <color name="colorInstagram">#545454</color>
 
-    <color name="colorTaskItemBackground">#41C8F4</color>
-    <color name="colorTextTask">#FFF</color>
+    <color name="colorTaskItemBackgroundNoCheck">#41C8F4</color>
+    <color name="colorTaskItemBackgroundCheck">#aee8fa</color>
+    <color name="colorTextTaskNoCheck">#FFF</color>
+    <color name="colorTextTaskCheck">#0175BB</color>
     <color name="colorDoneCheckBoxBackground">#0175BB</color>
+    <color name="colorDone">#28E23B</color>
+
     <color name="colorButtonAddTaskBackground">#63BE61</color>
 
     <color name="colorButtonAddPointsBackground">#D75332</color>
@@ -52,6 +56,18 @@
     <color name="calendarText">#7A7A7A</color>
     <color name="calendarBackground">#41C8F4</color>
     <color name="textNote">#FFF</color>
+
+    <color name="curTaskBackground">#AAE1FA</color>
+    <color name="curTaskBorder">#88D8F2</color>
+    <color name="colorCurTaskText">#0175BB</color>
+
+    <color name="colorLamp">#0175BB</color>
+    <color name="circleBackground">#0175BB</color>
+    <color name="ColorMark">#FFF</color>
+
+    <color name="NoteBackground">#AAE1FA</color>
+    <color name="NoteBorder">#88D8F2</color>
+    <color name="colorNoteText">#0175BB</color>
 
     <color name="hint">#979292</color>
 </resources>
