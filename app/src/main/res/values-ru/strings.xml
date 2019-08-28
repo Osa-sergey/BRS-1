@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">БРС</string>
+    <string name="app_name">iGrade</string>
     <string name="side_menu_news">Новости</string>
     <string name="side_menu_contacts">Контакты</string>
     <string name="side_menu_bug_report">Oтчет об ошибке</string>
