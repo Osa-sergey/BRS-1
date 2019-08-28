@@ -19,11 +19,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:srcCompat="@drawable/ic_student_avatar" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -33,29 +33,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
-                android:text="student`s name"
-                android:fontFamily="Roboto"
+                android:text="@string/student_s_name"
+                android:fontFamily="@font/robotoregular"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorToolBarText"/>
 
             <ImageButton
                 android:id="@+id/extraInfoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginStart="60dp"
-                android:background="@null"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_down_arrow" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/userGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="group"
-            android:fontFamily="Roboto"
+            android:text="@string/group"
+            android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorStudentsGroup"/>
 
@@ -76,7 +77,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/teacher"
-            android:fontFamily="Roboto"
+            android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorTextExtraInfo" />
 
@@ -86,8 +87,8 @@
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="Ivanov Ivan Ivanovich"
-            android:fontFamily="Roboto"
+            android:text="@string/teacherName"
+            android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorTextExtraInfoUpdated" />
 
@@ -98,7 +99,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/schedule"
-            android:fontFamily="Roboto"
+            android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorTextExtraInfo" />
 
@@ -109,8 +110,8 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Monday 1024\nTuesday 1020A\nFriday 1024"
-            android:fontFamily="Roboto"
+            android:text="@string/scheduleExample"
+            android:fontFamily="@font/robotoregular"
             android:textSize="13sp"
             android:textColor="@color/colorTextExtraInfoUpdated" />
         <View

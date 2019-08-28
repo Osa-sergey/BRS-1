@@ -1,6 +1,6 @@
 package com.misis.brs.Database;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -163,6 +163,23 @@ public class DBHelper {
         }return null;
     }
 
+    public static Hometask[] selectUpcoming(final Long curTime){
+        AsyncTask<Long, Void, Hometask[]> task = new AsyncTask<Long, Void, Hometask[]>() {
+            @Override
+            protected Hometask[] doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectUpcoming(curTime);
+            }
+        };
+        task.execute(curTime);
+        try{
+            return task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectOverdueHometask", e.toString());
+        }return null;
+    }
+
     public static Hometask[] selectHometaskForSemester(final int semester){
         AsyncTask<Integer, Void, Hometask[]> task = new AsyncTask<Integer, Void, Hometask[]>() {
             @Override
@@ -171,6 +188,23 @@ public class DBHelper {
             }
         };
         task.execute(semester);
+        try{
+            return task.get();
+        } catch (InterruptedException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        } catch (ExecutionException e) {
+            Log.e("selectTaskForSemester", e.toString());
+        }return null;
+    }
+
+    public static Hometask selectHometaskByDate(final long deadline){
+        AsyncTask<Long, Void, Hometask> task = new AsyncTask<Long, Void, Hometask>() {
+            @Override
+            protected Hometask doInBackground(Long... longs) {
+                return instance.db.hometaskDao().selectHometaskByDate(deadline);
+            }
+        };
+        task.execute(deadline);
         try{
             return task.get();
         } catch (InterruptedException e) {
@@ -202,11 +236,11 @@ public class DBHelper {
         task.execute(news1);
     }
 
-    public static void deleteNewsbyDateNews(final long dateNews){
+    public static void deleteNewsByDateNews(final long dateNews){
         AsyncTask<Long, Void, Void> task = new AsyncTask<Long, Void, Void>() {
             @Override
             protected Void doInBackground(Long... longs) {
-                instance.db.newsDao().deletebyDateNews(dateNews);
+                instance.db.newsDao().deleteByDateNews(dateNews);
                 return null;
             }
         };
@@ -228,5 +262,40 @@ public class DBHelper {
         } catch (ExecutionException e) {
             Log.e("selectAllNews", e.toString());
         }return null;
+    }
+
+    /**
+     * Функция проверки возможности добавления оценки для сходимости суммы
+     * @param mark добавляемая оценка
+     * @return 0 - можно добавить, 1 - лимит количества, 2 - лимит суммы баллов
+     */
+    public static int isAbleToAdd(Mark mark){
+        Mark[] ans = selectMarksForSemesterAndType(mark.getSemester(),mark.getMarkType());
+        if (ans == null) {
+            return 0;
+        }
+        switch (mark.getMarkType()){
+            case CLASS_PARTICIPATION_PART_1:
+            case CLASS_PARTICIPATION_PART_2:
+                int sum = 0;
+                for (int i = 0; i < ans.length; i++)
+                    sum += ans[i].getMark();
+                if (sum + mark.getMark() > 20)
+                    return 2;
+                else break;
+            case ONLINE_PART_1:
+            case ONLINE_PART_2:
+            case MIDTERM:
+            case FINAL_TEST:
+                if (ans.length != 0)
+                    return 1;
+                else break;
+            case PROJECT_PART_1:
+            case PROJECT_PART_2:
+                if (ans.length >= 2)
+                    return 1;
+                else break;
+        }
+        return 0;
     }
 }
