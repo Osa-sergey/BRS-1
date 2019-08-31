@@ -47,9 +47,9 @@
 
     <string-array name="types_of_marks_list_even">
         <item>Работа в классе(Сен-Окт)</item>
-        <item>Работа в классе(Нов-Дек)</item>
+        <item>Работа в классе(Ноя-Дек)</item>
         <item>Платформа(Сен-Окт)</item>
-        <item>Платформа(Нов-Дек)</item>
+        <item>Платформа(Ноя-Дек)</item>
         <item>Проект(Класс)</item>
         <item>Проект(Платформа)</item>
         <item>Промежуточный тест</item>
@@ -57,9 +57,9 @@
     </string-array>
 
     <string-array name="types_of_marks_list_odd">
-        <item>Работа в классе(Феб-Мар)</item>
+        <item>Работа в классе(Фев-Мар)</item>
         <item>Работа в классе(Апр-Май)</item>
-        <item>Платформа(Феб-Мар)</item>
+        <item>Платформа(Фев-Мар)</item>
         <item>Платформа(Апр-Май)</item>
         <item>Проект(Класс)</item>
         <item>Проект(Платформа)</item>

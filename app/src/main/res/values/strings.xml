@@ -46,9 +46,9 @@
     </string-array>
 
     <string-array name="types_of_marks_list_even">
-        <item>Class Participation(Sept-Oct)</item>
+        <item>Class Participation(Sep-Oct)</item>
         <item>Class Participation(Nov-Dec)</item>
-        <item>Online(Sept-Oct)</item>
+        <item>Online(Sep-Oct)</item>
         <item>Online(Nov-Dec)</item>
         <item>Project(In-class session)</item>
         <item>Project(Online assignments)</item>
