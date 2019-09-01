@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         drawer = findViewById(R.id.drawer_layout);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_forward);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_arrow_forward);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(this);
 
